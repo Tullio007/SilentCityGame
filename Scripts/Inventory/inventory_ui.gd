@@ -44,7 +44,7 @@ func _refresh_slots() -> void:
 		child.queue_free()
 
 	# Cria um slot para cada item no inventário
-	for item in Inventory.items:
+	for item in Inventory.get_all_items():
 		var slot: Panel = ItemSlotScene.instantiate()
 		slots_grid.add_child(slot)
 		slot.set_item(item)
