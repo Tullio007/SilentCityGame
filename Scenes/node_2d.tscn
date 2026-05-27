@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bq1qhb13o0tqe"]
+
+[ext_resource type="Script" path="res://node_2d.gd" id="1_j2wod"]
+[ext_resource type="Script" uid="uid://cevfrc0cqvlw4" path="res://Scripts/player/player.gd" id="2_v1qfn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hh5uf"]
+
+[node name="Node2D" type="Node2D" unique_id=1666435448]
+script = ExtResource("1_j2wod")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1941844576]
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=1061511216]
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 27.0
+scale = Vector2(0.5, 0.5)
+value = 100.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"] unique_id=1053219142]
+script = ExtResource("2_v1qfn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1408132772]
+shape = SubResource("RectangleShape2D_hh5uf")
