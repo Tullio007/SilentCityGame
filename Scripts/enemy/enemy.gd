@@ -12,6 +12,7 @@ var _direcao := 1.0
 var _pode_dar_dano := true
 
 @onready var hitbox: Area2D = $Hitbox
+@onready var _sprite: Sprite2D = get_node_or_null("Sprite")
 
 
 func _ready() -> void:
@@ -28,6 +29,9 @@ func _physics_process(delta: float) -> void:
 		_direcao = -1.0
 	elif global_position.x <= _origem_x - distancia_patrulha:
 		_direcao = 1.0
+
+	if _sprite:
+		_sprite.scale.x = absf(_sprite.scale.x) * _direcao
 
 	move_and_slide()
 
