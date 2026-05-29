@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bq1qhb13o0tqe"]
+[gd_scene load_steps=15 format=3 uid="uid://bq1qhb13o0tqe"]
 
 [ext_resource type="Script" path="res://node_2d.gd" id="1_j2wod"]
 [ext_resource type="Script" uid="uid://cevfrc0cqvlw4" path="res://Scripts/player/player.gd" id="2_v1qfn"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Items/pickup_item.gd" id="5_pickup"]
 [ext_resource type="Resource" path="res://Scripts/Items/chave.tres" id="6_chave"]
 [ext_resource type="PackedScene" path="res://Scenes/npc.tscn" id="7_npc"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/lumi - Animação parado .png" id="8_lumi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
 size = Vector2(32, 48)
@@ -86,12 +87,12 @@ shape = SubResource("RectangleShape2D_plat")
 position = Vector2(100, 350)
 script = ExtResource("2_v1qfn")
 
-[node name="Body" type="ColorRect" parent="CharacterBody2D"]
-offset_left = -16.0
-offset_top = -24.0
-offset_right = 16.0
-offset_bottom = 24.0
-color = Color(0.2, 0.9, 1, 1)
+[node name="Sprite" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.196, 0.196)
+texture = ExtResource("8_lumi")
+offset = Vector2(-278, 628)
+hframes = 3
+vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_player")
