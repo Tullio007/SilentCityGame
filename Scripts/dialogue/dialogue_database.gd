@@ -116,37 +116,27 @@ static func get_dialogues() -> Dictionary:
 						},
 						"M1_22": {
 							"speaker": "Marcos",
-							"text": "Use WASD para se mover.",
+							"text": "Use as setas ← → (ou A/D) para se mover.",
 							"next": "M1_23"
 						},
 						"M1_23": {
 							"speaker": "Marcos",
-							"text": "Pressione ESPAÇO para pular.",
-							"next": "M1_24"
-						},
-						"M1_24": {
-							"speaker": "Marcos",
-							"text": "Pressione F para disparar energia.",
+							"text": "Pressione ESPAÇO (ou W) para pular.",
 							"next": "M1_25"
 						},
 						"M1_25": {
 							"speaker": "Marcos",
-							"text": "Pressione E para coletar memórias.",
+							"text": "Pressione E para coletar a chave e os itens.",
 							"next": "M1_26"
 						},
 						"M1_26": {
 							"speaker": "Marcos",
-							"text": "Pressione C para interagir com objetos e personagens.",
+							"text": "Pressione E também para falar com personagens e abrir portas.",
 							"next": "M1_27"
 						},
 						"M1_27": {
 							"speaker": "Marcos",
 							"text": "Pressione I para abrir o inventário.",
-							"next": "M1_28"
-						},
-						"M1_28": {
-							"speaker": "Marcos",
-							"text": "Pressione ESC para acessar o menu.",
 							"next": "M1_29"
 						},
 						"M1_29": {
