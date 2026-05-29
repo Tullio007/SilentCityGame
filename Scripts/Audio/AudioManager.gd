@@ -8,19 +8,17 @@ var sfx_player: AudioStreamPlayer
 
 
 func _ready():
-	# cria players
 	bgm_player = AudioStreamPlayer.new()
 	sfx_player = AudioStreamPlayer.new()
 
 	add_child(bgm_player)
 	add_child(sfx_player)
 
-	# volumes padrão
 	bgm_player.volume_db = -8
 	sfx_player.volume_db = 0
 
 
-# 🎵 TOCAR MÚSICA DE FUNDO
+# 🎵 BGM
 func play_bgm(stream: AudioStream, loop: bool = true):
 	if stream == null:
 		return
@@ -33,24 +31,21 @@ func play_bgm(stream: AudioStream, loop: bool = true):
 	bgm_player.play()
 
 
-# ⛔ PARAR MÚSICA (MENU OU RESET)
 func stop_bgm():
 	bgm_player.stop()
 
 
-# ⏸️ PAUSAR MÚSICA (MENU)
 func pause_bgm():
 	if bgm_player.playing:
 		bgm_player.stream_paused = true
 
 
-# ▶️ RETOMAR MÚSICA (MENU)
 func resume_bgm():
 	if bgm_player.stream != null:
 		bgm_player.stream_paused = false
 
 
-# 🔊 TOCAR SFX
+# 🔊 SFX
 func play_sfx(stream: AudioStream):
 	if stream == null:
 		return
@@ -59,16 +54,7 @@ func play_sfx(stream: AudioStream):
 	sfx_player.play()
 
 
-# 🎚️ VOLUME (OPCIONAL)
-func set_bgm_volume(db: float):
-	bgm_player.volume_db = db
-
-
-func set_sfx_volume(db: float):
-	sfx_player.volume_db = db
-
-
-# 🎮 FASES (MÚSICA AUTOMÁTICA)
+# 🎮 FASES (MÚSICA)
 func play_phase_music(phase: int):
 	var path := ""
 
@@ -87,24 +73,24 @@ func play_phase_music(phase: int):
 	play_bgm(load(path))
 
 
-# 🌊 HORDA COMEÇA
-func play_horde_start():
-	play_sfx(load("res://assets/audio/sfx/world/horde_start.wav"))
-
-
-# ☠️ HORDA DERROTADA (FIM DA FASE)
-func play_horde_cleared():
+# 🌊 HORDA DERROTADA (ÚNICO SOM DE VITÓRIA DE FASE)
+func play_horde_complete():
 	play_sfx(load("res://assets/audio/sfx/world/horde_complete.wav"))
 
 
-# 👑 NOX APARECE (BOSS FINAL)
-func play_nox_intro():
-	play_sfx(load("res://assets/audio/sfx/enemies/nox/attack.wav"))
-
-
-# 💀 NOX DERROTADO (FINAL DO JOGO)
+# 👑 NOX DERROTADO (USA O MESMO SOM DE HORDA COMPLETA)
 func play_nox_defeat():
-	play_sfx(load("res://assets/audio/sfx/enemies/nox/death.wav"))
+	play_horde_complete()
+
+
+# 🌊 ÚLTIMO MOB DA FASE DERROTADO
+func play_last_enemy_defeated():
+	play_horde_complete()
+
+
+# 🌊 INÍCIO DE HORDA (OPCIONAL)
+func play_horde_start():
+	play_sfx(load("res://assets/audio/sfx/world/horde_start.wav"))
 
 
 # 🎮 LUMI (PLAYER)
