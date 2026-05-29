@@ -1,24 +1,170 @@
-[gd_scene format=3 uid="uid://bq1qhb13o0tqe"]
+[gd_scene load_steps=13 format=3 uid="uid://bq1qhb13o0tqe"]
 
 [ext_resource type="Script" path="res://node_2d.gd" id="1_j2wod"]
 [ext_resource type="Script" uid="uid://cevfrc0cqvlw4" path="res://Scripts/player/player.gd" id="2_v1qfn"]
+[ext_resource type="PackedScene" path="res://Scenes/enemy.tscn" id="3_enemy"]
+[ext_resource type="PackedScene" path="res://Scenes/door.tscn" id="4_door"]
+[ext_resource type="Script" path="res://Scripts/Items/pickup_item.gd" id="5_pickup"]
+[ext_resource type="Resource" path="res://Scripts/Items/chave.tres" id="6_chave"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hh5uf"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
+size = Vector2(32, 48)
 
-[node name="Node2D" type="Node2D" unique_id=1666435448]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(3200, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat"]
+size = Vector2(140, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pickup"]
+size = Vector2(28, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_win"]
+size = Vector2(60, 160)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_end"]
+bg_color = Color(0.04, 0.06, 0.1, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.85, 1, 1)
+
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_j2wod")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1941844576]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=1061511216]
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
 offset_left = 8.0
 offset_right = 48.0
 offset_bottom = 27.0
 scale = Vector2(0.5, 0.5)
 value = 100.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"] unique_id=1053219142]
+[node name="Chao" type="StaticBody2D" parent="."]
+position = Vector2(1500, 460)
+
+[node name="Body" type="ColorRect" parent="Chao"]
+offset_left = -1600.0
+offset_top = -40.0
+offset_right = 1600.0
+offset_bottom = 40.0
+color = Color(0.08, 0.1, 0.16, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="Plataforma1" type="StaticBody2D" parent="."]
+position = Vector2(850, 360)
+
+[node name="Body" type="ColorRect" parent="Plataforma1"]
+offset_left = -70.0
+offset_top = -12.0
+offset_right = 70.0
+offset_bottom = 12.0
+color = Color(0.12, 0.16, 0.24, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforma1"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="Plataforma2" type="StaticBody2D" parent="."]
+position = Vector2(1150, 300)
+
+[node name="Body" type="ColorRect" parent="Plataforma2"]
+offset_left = -70.0
+offset_top = -12.0
+offset_right = 70.0
+offset_bottom = 12.0
+color = Color(0.12, 0.16, 0.24, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforma2"]
+shape = SubResource("RectangleShape2D_plat")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(100, 350)
 script = ExtResource("2_v1qfn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1408132772]
-shape = SubResource("RectangleShape2D_hh5uf")
+[node name="Body" type="ColorRect" parent="CharacterBody2D"]
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = 24.0
+color = Color(0.2, 0.9, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_player")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position_smoothing_enabled = true
+limit_left = 0
+limit_top = -100
+limit_right = 3100
+limit_bottom = 560
+
+[node name="Mob1" parent="." instance=ExtResource("3_enemy")]
+position = Vector2(650, 402)
+
+[node name="Mob2" parent="." instance=ExtResource("3_enemy")]
+position = Vector2(1400, 402)
+
+[node name="Mob3" parent="." instance=ExtResource("3_enemy")]
+position = Vector2(2050, 402)
+
+[node name="ChavePickup" type="Area2D" parent="."]
+position = Vector2(2400, 388)
+script = ExtResource("5_pickup")
+item_data = ExtResource("6_chave")
+
+[node name="Body" type="ColorRect" parent="ChavePickup"]
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+color = Color(1, 0.85, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChavePickup"]
+shape = SubResource("RectangleShape2D_pickup")
+
+[node name="Door" parent="." instance=ExtResource("4_door")]
+position = Vector2(2750, 360)
+
+[node name="WinZone" type="Area2D" parent="."]
+position = Vector2(2920, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinZone"]
+shape = SubResource("RectangleShape2D_win")
+
+[node name="EndScreen" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="Panel" type="Panel" parent="EndScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_end")
+
+[node name="VBox" type="VBoxContainer" parent="EndScreen/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Titulo" type="Label" parent="EndScreen/Panel/VBox"]
+theme_override_colors/font_color = Color(0, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "FIM"
+horizontal_alignment = 1
+
+[node name="Reiniciar" type="Button" parent="EndScreen/Panel/VBox"]
+text = "Jogar de novo"
