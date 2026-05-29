@@ -33,23 +33,18 @@ func _ready() -> void:
 
 
 func _apply_styles() -> void:
-	# Painel principal
 	background.add_theme_stylebox_override("panel", _make_panel_style(COLOR_BG_MAIN, COLOR_BORDER_CYAN, 2))
 
-	# Título
 	title_label.text = "[ INVENTÁRIO ]"
 	title_label.add_theme_color_override("font_color", COLOR_BORDER_CYAN)
 	title_label.add_theme_font_size_override("font_size", 16)
 
-	# Painel de detalhes
 	details_panel.add_theme_stylebox_override("panel", _make_panel_style(COLOR_BG_DETAILS, COLOR_BORDER_IDLE, 1))
 
-	# Labels de nome e descrição
 	item_name_label.add_theme_color_override("font_color", COLOR_TEXT_PRIMARY)
 	item_name_label.add_theme_font_size_override("font_size", 15)
 	item_description_label.add_theme_color_override("font_color", COLOR_TEXT_SECONDARY)
 
-	# Botões
 	_style_button(use_button)
 	_style_button(discard_button)
 
@@ -115,7 +110,7 @@ func _refresh_slots() -> void:
 	for child in slots_grid.get_children():
 		child.queue_free()
 
-	for item in Inventory.items:
+	for item in Inventory.get_all_items():
 		var slot: Panel = ItemSlotScene.instantiate()
 		slots_grid.add_child(slot)
 		slot.set_item(item)

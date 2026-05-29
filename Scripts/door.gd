@@ -33,11 +33,9 @@ func _on_area_body_exited(body: Node) -> void:
 
 
 func _tentar_abrir() -> void:
-	if Inventory.has_item(required_item_id):
-		for item in Inventory.items:
-			if item.id == required_item_id:
-				Inventory.remove_item(item)
-				break
+	var item: InventoryItem = Inventory.get_item_by_id(required_item_id)
+	if item != null:
+		Inventory.remove_item(item)
 		_abrir()
 	else:
 		aviso.text = "Está trancada. Falta uma chave."

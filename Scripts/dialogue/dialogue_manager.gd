@@ -8,7 +8,6 @@ var current_node_id = ""
 func _ready():
 	dialogues = DialogueDatabase.get_dialogues()
 
-# iniciar dialogo
 func start_dialogue(npc_id: String, phase: int):
 	if not dialogues.has(npc_id):
 		print("NPC não encontrado")
@@ -24,7 +23,6 @@ func start_dialogue(npc_id: String, phase: int):
 	print("=== INICIO DIALOGO ===")
 	show_node()
 
-# mostrar nó atual
 func show_node():
 	if current_node_id == "":
 		end_dialogue()
@@ -36,11 +34,9 @@ func show_node():
 	print("NPC:", node.get("speaker", ""))
 	print("Fala:", node.get("text", ""))
 
-	# ação
 	if node.has("action"):
 		execute_action(node["action"])
 
-	# opções
 	if node.has("options"):
 		print("Escolhas:")
 		for i in range(node["options"].size()):
@@ -48,7 +44,6 @@ func show_node():
 	else:
 		print("Digite next() para continuar")
 
-# avançar diálogo
 func next():
 	var node = current_dialogue["nodes"][current_node_id]
 
@@ -59,7 +54,6 @@ func next():
 	current_node_id = node.get("next", "")
 	show_node()
 
-# escolher opção
 func choose(index: int):
 	var node = current_dialogue["nodes"][current_node_id]
 
@@ -76,23 +70,31 @@ func choose(index: int):
 	current_node_id = options[index]["next"]
 	show_node()
 
-# ações do jogo
 func execute_action(action_name: String):
 	print("Executando:", action_name)
 
 	match action_name:
 		"mark_goblins":
+			GameState.set_flag("goblins_marked", true)
 			print("Goblins marcados no mapa")
+
 		"start_goblin_combat":
 			print("Combate iniciado")
+
 		"start_nox_battle":
 			print("Batalha final")
+
 		"activate_reactor":
+			GameState.set_flag("final_choice", "activate")
 			print("Final A")
+
 		"shutdown_world":
+			GameState.set_flag("final_choice", "shutdown")
 			print("Final B")
+
 		"transition_to_final_choice":
 			print("Cena final")
+
 		_:
 			print("Ação desconhecida")
 
