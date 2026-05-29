@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bq1qhb13o0tqe"]
+[gd_scene load_steps=14 format=3 uid="uid://bq1qhb13o0tqe"]
 
 [ext_resource type="Script" path="res://node_2d.gd" id="1_j2wod"]
 [ext_resource type="Script" uid="uid://cevfrc0cqvlw4" path="res://Scripts/player/player.gd" id="2_v1qfn"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/door.tscn" id="4_door"]
 [ext_resource type="Script" path="res://Scripts/Items/pickup_item.gd" id="5_pickup"]
 [ext_resource type="Resource" path="res://Scripts/Items/chave.tres" id="6_chave"]
+[ext_resource type="PackedScene" path="res://Scenes/npc.tscn" id="7_npc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
 size = Vector2(32, 48)
@@ -101,6 +102,9 @@ limit_left = 0
 limit_top = -100
 limit_right = 3100
 limit_bottom = 560
+
+[node name="Marcos" parent="." instance=ExtResource("7_npc")]
+position = Vector2(320, 392)
 
 [node name="Mob1" parent="." instance=ExtResource("3_enemy")]
 position = Vector2(650, 402)

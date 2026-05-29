@@ -1,6 +1,9 @@
 extends Node
 class_name DialogueManager
 
+signal dialogue_node(speaker, text, options)
+signal dialogue_finished
+
 var dialogues = {}
 var current_dialogue = {}
 var current_node_id = ""
@@ -36,6 +39,8 @@ func show_node():
 
 	if node.has("action"):
 		execute_action(node["action"])
+
+	emit_signal("dialogue_node", node.get("speaker", ""), node.get("text", ""), node.get("options", []))
 
 	if node.has("options"):
 		print("Escolhas:")
@@ -102,3 +107,4 @@ func end_dialogue():
 	print("=== FIM DIALOGO ===")
 	current_dialogue = {}
 	current_node_id = ""
+	emit_signal("dialogue_finished")
