@@ -22,6 +22,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 
 Inventory="*res://Scripts/Inventory/inventory.gd"
 GameState="*res://Scripts/global/game_state.gd"
+DialogueUI="*res://Scenes/UI/dialogue_ui.tscn"
 
 [input]
 

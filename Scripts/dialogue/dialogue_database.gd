@@ -471,4 +471,3 @@ static func get_dialogues() -> Dictionary:
 			}
 		}
 	}
-}
