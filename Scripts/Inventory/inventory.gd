@@ -114,7 +114,7 @@ func remove_item(item: InventoryItem, amount: int = -1) -> void:
 
 	if amount == -1 or items[item.id].quantity <= amount:
 		# Remove o item completamente do Dictionary
-		var removed := items[item.id]
+		var removed: InventoryItem = items[item.id]
 		items.erase(item.id)
 		emit_signal("item_removed", removed)
 	else:

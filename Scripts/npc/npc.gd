@@ -4,7 +4,7 @@ class_name NPC
 @export var npc_id: String = "marcos"
 @export var phase: int = 1
 
-var dialogue_manager := DialogueManager.new()
+var dialogue_manager: DialogueManager
 var _player_perto := false
 
 @onready var _hint: CanvasItem = get_node_or_null("Hint")
@@ -12,7 +12,10 @@ var _player_perto := false
 
 
 func _ready():
-	dialogue_manager._ready()
+	# Adiciona como filho para ser gerenciado pela árvore (evita vazamento ao sair);
+	# o Godot chama o _ready() do manager automaticamente ao adicionar.
+	dialogue_manager = DialogueManager.new()
+	add_child(dialogue_manager)
 	if _hint:
 		_hint.visible = false
 	if _area:
