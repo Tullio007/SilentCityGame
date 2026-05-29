@@ -70,15 +70,15 @@ Mecânicas principais:
 
 ## 6. Estrutura do Jogo
 
-Progressão linear com 5 fases.
+O escopo foi reduzido para uma **fase única jogável**, com início, meio e fim:
 
-1. Cidade Abandonada  
-2. Estação de Energia  
-3. Laboratório  
-4. Torre Central  
-5. Núcleo Final  
+- **Início:** Lumi começa na borda da cidade abandonada.
+- **Meio:** o trajeto é guardado por **3 mobs hostis** que causam dano ao encostar no player.
+- **Fim:** Lumi coleta uma **chave** e a usa para abrir a **porta trancada** (puzzle que reaproveita o inventário); ao atravessá-la, surge a tela de **"Fim"**.
 
-Na última fase ocorre o confronto com R-01.
+A fase é a cena principal `Scenes/node_2d.tscn` (configurada como `run/main_scene`).
+
+> As 5 fases originais (Cidade Abandonada → Núcleo Final) e o confronto com R-01 ficam **fora do escopo desta entrega**.
 
 ---
 
