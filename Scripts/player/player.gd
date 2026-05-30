@@ -1,4 +1,10 @@
 extends CharacterBody2D
+@export var camera_limit_left: int = 0
+@export var camera_limit_top: int = 0
+@export var camera_limit_right: int = 3000
+@export var camera_limit_bottom: int = 2000
+@export var camera_smoothing_speed: float = 5.0
+@onready var camera: Camera2D = $Camera2D
 
 signal vida_alterada(vida_atual: int, vida_maxima: int)
 signal morreu
@@ -23,7 +29,13 @@ var _anim_t := 0.0
 
 func _ready() -> void:
 	add_to_group("player")
-
+	camera.make_current()
+	camera.position_smoothing_enabled = true
+	camera.position_smoothing_speed = camera_smoothing_speed
+	camera.limit_left = camera_limit_left
+	camera.limit_top = camera_limit_top
+	camera.limit_right = camera_limit_right
+	camera.limit_bottom = camera_limit_bottom
 
 func _physics_process(delta: float) -> void:
 	if morto:
@@ -79,3 +91,18 @@ func morrer() -> void:
 	morto = true
 	velocity = Vector2.ZERO
 	morreu.emit()
+
+func shake(intensidade: float = 8.0, duracao: float = 0.2) -> void:
+	var offset_original := camera.offset
+	var tempo := 0.0
+
+	while tempo < duracao:
+		camera.offset = Vector2(
+			randf_range(-intensidade, intensidade),
+			randf_range(-intensidade, intensidade)
+		)
+
+		await get_tree().process_frame
+		tempo += get_process_delta_time()
+
+	camera.offset = offset_original
