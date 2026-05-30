@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cgdu2xgvt3vwo"]
+
+[node name="MenuPrincipal" type="Node2D" unique_id=1524422044]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=873899671]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=566385529]
+layout_mode = 2
+text = "Silent City"
+
+[node name="BotaoIniciar" type="Button" parent="VBoxContainer" unique_id=2022467037]
+layout_mode = 2
+text = "Iniciar Jogo"
+alignment = 0
+vertical_icon_alignment = 0
+
+[node name="BotaoFechar" type="Button" parent="VBoxContainer" unique_id=1320384793]
+layout_mode = 2
+text = "Fechar Jogo"
+alignment = 0
+vertical_icon_alignment = 0
