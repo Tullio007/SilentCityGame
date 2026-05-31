@@ -15,7 +15,6 @@ func _ready():
 	add_child(bgm_player)
 	add_child(sfx_player)
 
-	# volumes padrão
 	bgm_player.volume_db = -8
 	sfx_player.volume_db = 0
 
@@ -24,11 +23,10 @@ func _ready():
 # 🎵 BGM
 # =====================================================
 
-func play_bgm(stream: AudioStream, loop: bool = true):
+func play_bgm(stream: AudioStream):
 	if stream == null:
 		return
 
-	# evita reiniciar mesma música
 	if bgm_player.stream == stream and bgm_player.playing:
 		return
 
@@ -51,7 +49,7 @@ func resume_bgm():
 
 
 # =====================================================
-# 🎬 INTRO / MENU
+# 🎬 INTRO
 # =====================================================
 
 func play_intro_music():
@@ -61,33 +59,29 @@ func play_intro_music():
 
 
 # =====================================================
-# 🎮 PHASE MUSIC
+# 🎮 FASES
 # =====================================================
 
 func play_phase_music(phase: int):
-	var path := ""
+	var path = ""
 
 	match phase:
 		1:
 			path = "res://assets/audio/music/phases/phase_1_theme.ogg"
-
 		2:
 			path = "res://assets/audio/music/phases/phase_2_theme.ogg"
-
 		3:
 			path = "res://assets/audio/music/phases/phase_3_theme.ogg"
-
 		4:
 			path = "res://assets/audio/music/phases/phase_4_theme.ogg"
-
 		_:
-			path = "res://assets/audio/music/phases/phase_4_theme.ogg"
+			path = "res://assets/audio/music/phases/phase_1_theme.ogg"
 
 	play_bgm(load(path))
 
 
 # =====================================================
-# 🎵 FINAL / CREDITS
+# 🏁 CRÉDITOS / GAME OVER
 # =====================================================
 
 func play_credits_music():
@@ -96,19 +90,14 @@ func play_credits_music():
 	))
 
 
-# =====================================================
-# 💀 GAME OVER
-# =====================================================
-
 func play_game_over_music():
-	play_bgm(
-		load("res://assets/audio/music/defeat/lumi_died_theme.ogg"),
-		false
-	)
+	play_bgm(load(
+		"res://assets/audio/music/defeat/lumi_died_theme.ogg"
+	))
 
 
 # =====================================================
-# 🔊 BASE SFX
+# 🔊 SFX BASE
 # =====================================================
 
 func play_sfx(stream: AudioStream):
@@ -120,23 +109,19 @@ func play_sfx(stream: AudioStream):
 
 
 # =====================================================
-# 🌊 HORDA COMPLETA / FIM DE FASE / NOX
+# 🌎 WORLD
 # =====================================================
 
 func play_horde_complete():
 	play_sfx(load(
-		"res://assets/audio/sfx/world/horde_complete.wav"
+		"res://assets/audio/sfx/world/horde_complete.ogg"
 	))
 
 
-# último mob derrotado
-func play_last_enemy_defeated():
-	play_horde_complete()
-
-
-# nox derrotado
-func play_nox_defeat():
-	play_horde_complete()
+func play_door_open():
+	play_sfx(load(
+		"res://assets/audio/sfx/world/door_open.ogg"
+	))
 
 
 # =====================================================
@@ -145,12 +130,13 @@ func play_nox_defeat():
 
 func play_mob1_attack():
 	play_sfx(load(
-		"res://assets/audio/sfx/enemies/mob1/attack.wav"
+		"res://assets/audio/sfx/enemies/mob1/attack.ogg"
 	))
+
 
 func play_mob1_death():
 	play_sfx(load(
-		"res://assets/audio/sfx/enemies/mob1/death.wav"
+		"res://assets/audio/sfx/enemies/mob1/death.ogg"
 	))
 
 
@@ -160,12 +146,13 @@ func play_mob1_death():
 
 func play_mob2_attack():
 	play_sfx(load(
-		"res://assets/audio/sfx/enemies/mob2/attack.wav"
+		"res://assets/audio/sfx/enemies/mob2/attack.ogg"
 	))
+
 
 func play_mob2_death():
 	play_sfx(load(
-		"res://assets/audio/sfx/enemies/mob2/death.wav"
+		"res://assets/audio/sfx/enemies/mob2/death.ogg"
 	))
 
 
@@ -175,12 +162,13 @@ func play_mob2_death():
 
 func play_mob3_attack():
 	play_sfx(load(
-		"res://assets/audio/sfx/enemies/mob3/attack.wav"
+		"res://assets/audio/sfx/enemies/mob3/attack.ogg"
 	))
+
 
 func play_mob3_death():
 	play_sfx(load(
-		"res://assets/audio/sfx/enemies/mob3/death.wav"
+		"res://assets/audio/sfx/enemies/mob3/death.ogg"
 	))
 
 
@@ -190,38 +178,41 @@ func play_mob3_death():
 
 func play_nox_attack():
 	play_sfx(load(
-		"res://assets/audio/sfx/enemies/nox/attack.wav"
+		"res://assets/audio/sfx/enemies/nox/attack.ogg"
+	))
+
+
+func play_nox_defeat():
+	play_sfx(load(
+		"res://assets/audio/sfx/world/horde_complete.ogg"
 	))
 
 
 # =====================================================
-# 🎮 LUMI
+# 🤖 LUMI
 # =====================================================
 
 func play_lumi_attack():
 	play_sfx(load(
-		"res://assets/audio/sfx/lumi/attack.wav"
+		"res://assets/audio/sfx/lumi/attack.ogg"
 	))
 
 
-# tomando dano
 func play_lumi_hurt():
 	play_sfx(load(
-		"res://assets/audio/sfx/lumi/hurt.wav"
+		"res://assets/audio/sfx/lumi/hurt.ogg"
 	))
 
 
-# coleta item
 func play_item_pickup():
 	play_sfx(load(
-		"res://assets/audio/sfx/lumi/item_pickup.wav"
+		"res://assets/audio/sfx/lumi/item_pickup.ogg"
 	))
 
 
-# coleta vida
 func play_health_pickup():
 	play_sfx(load(
-		"res://assets/audio/sfx/lumi/health_pickup.wav"
+		"res://assets/audio/sfx/lumi/health_pickup.ogg"
 	))
 
 
@@ -231,21 +222,11 @@ func play_health_pickup():
 
 func play_button_click():
 	play_sfx(load(
-		"res://assets/audio/sfx/ui/button_click.wav"
+		"res://assets/audio/sfx/ui/button_click.ogg"
 	))
 
 
 func play_dialogue_skip():
 	play_sfx(load(
-		"res://assets/audio/sfx/ui/dialogue_skip.wav"
-	))
-
-
-# =====================================================
-# 🚪 WORLD
-# =====================================================
-
-func play_door_open():
-	play_sfx(load(
-		"res://assets/audio/sfx/world/door_open.wav"
+		"res://assets/audio/sfx/ui/dialogue_skip.ogg"
 	))
