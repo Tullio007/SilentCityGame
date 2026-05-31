@@ -1,0 +1,23 @@
+[gd_resource type="Theme" format=3 uid="uid://b4d4x1hcwn00"]
+
+[ext_resource type="StyleBox" uid="uid://b0ljmeacyltbg" path="res://Scenes/UI/botão tela inicial .tres" id="1_qjdp7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjdp7"]
+bg_color = Color(0.20904428, 0.37802485, 0.4736135, 1)
+border_width_left = 10
+border_width_top = 2
+border_width_right = 10
+border_width_bottom = 2
+border_color = Color(0.41540217, 0.76291245, 0.9124802, 1)
+border_blend = true
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(0.8980392, 0.8352941, 0.61960787, 1)
+Button/colors/font_hover_color = Color(0.8980392, 0.8352941, 0.61960787, 1)
+Button/colors/font_hover_pressed_color = Color(0.8980392, 0.8352941, 0.61960787, 1)
+Button/colors/font_pressed_color = Color(0.8980392, 0.8352941, 0.61960787, 1)
+Button/styles/focus = ExtResource("1_qjdp7")
+Button/styles/hover = ExtResource("1_qjdp7")
+Button/styles/normal = ExtResource("1_qjdp7")
+Button/styles/pressed = SubResource("StyleBoxFlat_qjdp7")
