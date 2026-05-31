@@ -48,8 +48,17 @@ func tomar_dano(valor: int) -> void:
 		return
 	vida = max(vida - valor, 0)
 	vida_alterada.emit(vida, VIDA_MAXIMA)
+	_flash_dano()
 	if vida == 0:
 		morrer()
+
+
+func _flash_dano() -> void:
+	if _sprite == null:
+		return
+	var tween := create_tween()
+	tween.tween_property(_sprite, "modulate", Color(1.6, 0.35, 0.35, 1.0), 0.06)
+	tween.tween_property(_sprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.22)
 
 
 func aplicar_knockback(forca: Vector2) -> void:
