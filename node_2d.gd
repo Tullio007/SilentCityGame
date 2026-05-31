@@ -6,6 +6,8 @@ extends Node2D
 @onready var end_title: Label = $EndScreen/Panel/VBox/Titulo
 @onready var restart_button: Button = $EndScreen/Panel/VBox/Reiniciar
 @onready var win_zone: Area2D = $WinZone
+@onready var intro: CanvasLayer = $Intro
+@onready var intro_wrapper: Control = $Intro/Wrapper
 
 
 func _ready() -> void:
@@ -16,6 +18,17 @@ func _ready() -> void:
 	player.morreu.connect(_on_player_morreu)
 	win_zone.body_entered.connect(_on_win_zone_body_entered)
 	restart_button.pressed.connect(_on_reiniciar)
+	_animar_intro()
+
+
+func _animar_intro() -> void:
+	intro_wrapper.modulate.a = 0.0
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(intro_wrapper, "modulate:a", 1.0, 0.6).set_ease(Tween.EASE_OUT)
+	tween.tween_interval(2.6)
+	tween.tween_property(intro_wrapper, "modulate:a", 0.0, 2.0).set_ease(Tween.EASE_IN)
+	tween.tween_callback(func(): intro.queue_free())
 
 
 func _on_vida_alterada(vida_atual: int, _vida_max: int) -> void:
