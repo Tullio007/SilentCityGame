@@ -1,22 +1,24 @@
-[gd_scene load_steps=15 format=3 uid="uid://bq1qhb13o0tqe"]
+[gd_scene format=3 uid="uid://bq1qhb13o0tqe"]
 
-[ext_resource type="Script" path="res://node_2d.gd" id="1_j2wod"]
+[ext_resource type="Script" uid="uid://c7wg2yy07sk43" path="res://node_2d.gd" id="1_j2wod"]
 [ext_resource type="Script" uid="uid://cevfrc0cqvlw4" path="res://Scripts/player/player.gd" id="2_v1qfn"]
 [ext_resource type="PackedScene" path="res://Scenes/enemy.tscn" id="3_enemy"]
 [ext_resource type="PackedScene" path="res://Scenes/door.tscn" id="4_door"]
-[ext_resource type="Script" path="res://Scripts/Items/pickup_item.gd" id="5_pickup"]
+[ext_resource type="Script" uid="uid://cg1r25s0fyi1l" path="res://Scripts/Items/pickup_item.gd" id="5_pickup"]
 [ext_resource type="Resource" path="res://Scripts/Items/chave.tres" id="6_chave"]
 [ext_resource type="PackedScene" path="res://Scenes/npc.tscn" id="7_npc"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/lumi - Animação parado .png" id="8_lumi"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
-size = Vector2(32, 48)
+[ext_resource type="Texture2D" uid="uid://d3vg3j4c7nmt3" path="res://Assets/Sprites/lumi - Animação parado .png" id="8_lumi"]
+[ext_resource type="PackedScene" uid="uid://dhc6rtdhp4gcm" path="res://Scenes/pause_menu.tscn" id="9_chwn1"]
+[ext_resource type="Theme" uid="uid://bh2byfglkb0va" path="res://Scenes/UI/tema dos botões da tela.tres" id="9_hvaui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(3200, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_plat"]
 size = Vector2(140, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
+size = Vector2(32, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pickup"]
 size = Vector2(28, 28)
@@ -32,118 +34,118 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0.85, 1, 1)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=487275355]
 script = ExtResource("1_j2wod")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1593421375]
 
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=326404]
 offset_left = 8.0
 offset_right = 48.0
 offset_bottom = 27.0
 scale = Vector2(0.5, 0.5)
 value = 100.0
 
-[node name="Chao" type="StaticBody2D" parent="."]
+[node name="Chao" type="StaticBody2D" parent="." unique_id=1421890492]
 position = Vector2(1500, 460)
 
-[node name="Body" type="ColorRect" parent="Chao"]
+[node name="Body" type="ColorRect" parent="Chao" unique_id=1884819080]
 offset_left = -1600.0
 offset_top = -40.0
 offset_right = 1600.0
 offset_bottom = 40.0
 color = Color(0.08, 0.1, 0.16, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao" unique_id=1233351804]
 shape = SubResource("RectangleShape2D_ground")
 
-[node name="Plataforma1" type="StaticBody2D" parent="."]
+[node name="Plataforma1" type="StaticBody2D" parent="." unique_id=934880477]
 position = Vector2(850, 360)
 
-[node name="Body" type="ColorRect" parent="Plataforma1"]
+[node name="Body" type="ColorRect" parent="Plataforma1" unique_id=1702139531]
 offset_left = -70.0
 offset_top = -12.0
 offset_right = 70.0
 offset_bottom = 12.0
 color = Color(0.12, 0.16, 0.24, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforma1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforma1" unique_id=1418469643]
 shape = SubResource("RectangleShape2D_plat")
 
-[node name="Plataforma2" type="StaticBody2D" parent="."]
+[node name="Plataforma2" type="StaticBody2D" parent="." unique_id=1616569255]
 position = Vector2(1150, 300)
 
-[node name="Body" type="ColorRect" parent="Plataforma2"]
+[node name="Body" type="ColorRect" parent="Plataforma2" unique_id=1053707062]
 offset_left = -70.0
 offset_top = -12.0
 offset_right = 70.0
 offset_bottom = 12.0
 color = Color(0.12, 0.16, 0.24, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforma2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforma2" unique_id=2097374977]
 shape = SubResource("RectangleShape2D_plat")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1347597296]
 position = Vector2(100, 350)
 script = ExtResource("2_v1qfn")
 
-[node name="Sprite" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite" type="Sprite2D" parent="CharacterBody2D" unique_id=1350750579]
 scale = Vector2(0.196, 0.196)
 texture = ExtResource("8_lumi")
 offset = Vector2(-278, 628)
 hframes = 3
 vframes = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1621171682]
 shape = SubResource("RectangleShape2D_player")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-position_smoothing_enabled = true
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=196708414]
 limit_left = 0
 limit_top = -100
 limit_right = 3100
 limit_bottom = 560
+position_smoothing_enabled = true
 
-[node name="Marcos" parent="." instance=ExtResource("7_npc")]
+[node name="Marcos" parent="." unique_id=1745741367 instance=ExtResource("7_npc")]
 position = Vector2(320, 392)
 
-[node name="Mob1" parent="." instance=ExtResource("3_enemy")]
+[node name="Mob1" parent="." unique_id=1922744741 instance=ExtResource("3_enemy")]
 position = Vector2(650, 402)
 
-[node name="Mob2" parent="." instance=ExtResource("3_enemy")]
+[node name="Mob2" parent="." unique_id=1594998317 instance=ExtResource("3_enemy")]
 position = Vector2(1400, 402)
 
-[node name="Mob3" parent="." instance=ExtResource("3_enemy")]
+[node name="Mob3" parent="." unique_id=1813855727 instance=ExtResource("3_enemy")]
 position = Vector2(2050, 402)
 
-[node name="ChavePickup" type="Area2D" parent="."]
+[node name="ChavePickup" type="Area2D" parent="." unique_id=1031255744]
 position = Vector2(2400, 388)
 script = ExtResource("5_pickup")
 item_data = ExtResource("6_chave")
 
-[node name="Body" type="ColorRect" parent="ChavePickup"]
+[node name="Body" type="ColorRect" parent="ChavePickup" unique_id=532768050]
 offset_left = -12.0
 offset_top = -12.0
 offset_right = 12.0
 offset_bottom = 12.0
 color = Color(1, 0.85, 0.1, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChavePickup"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChavePickup" unique_id=958395321]
 shape = SubResource("RectangleShape2D_pickup")
 
-[node name="Door" parent="." instance=ExtResource("4_door")]
+[node name="Door" parent="." unique_id=1982376233 instance=ExtResource("4_door")]
 position = Vector2(2750, 360)
 
-[node name="WinZone" type="Area2D" parent="."]
+[node name="WinZone" type="Area2D" parent="." unique_id=2062216600]
 position = Vector2(2920, 360)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WinZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinZone" unique_id=23207291]
 shape = SubResource("RectangleShape2D_win")
 
-[node name="EndScreen" type="CanvasLayer" parent="."]
+[node name="EndScreen" type="CanvasLayer" parent="." unique_id=482465596]
 process_mode = 3
 
-[node name="Panel" type="Panel" parent="EndScreen"]
+[node name="Panel" type="Panel" parent="EndScreen" unique_id=1548406455]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -151,7 +153,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_end")
 
-[node name="VBox" type="VBoxContainer" parent="EndScreen/Panel"]
+[node name="VBox" type="VBoxContainer" parent="EndScreen/Panel" unique_id=901266783]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -165,11 +168,16 @@ grow_vertical = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="Titulo" type="Label" parent="EndScreen/Panel/VBox"]
+[node name="Titulo" type="Label" parent="EndScreen/Panel/VBox" unique_id=1475754520]
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.85, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = "FIM"
 horizontal_alignment = 1
 
-[node name="Reiniciar" type="Button" parent="EndScreen/Panel/VBox"]
+[node name="Reiniciar" type="Button" parent="EndScreen/Panel/VBox" unique_id=1822287930]
+layout_mode = 2
+theme = ExtResource("9_hvaui")
 text = "Jogar de novo"
+
+[node name="pause_menu" parent="." unique_id=106129337 instance=ExtResource("9_chwn1")]
