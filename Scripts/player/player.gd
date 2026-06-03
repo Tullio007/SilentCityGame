@@ -1,4 +1,12 @@
 extends CharacterBody2D
+@export var camera_limit_left: int = 0
+@export var camera_limit_top: int = 0
+@export var camera_limit_right: int = 3100
+@export var camera_limit_bottom: int = 560
+@export var camera_smoothing_speed: float = 5.0
+@onready var camera: Camera2D = $Camera2D
+
+var _shake_tween: Tween = null
 
 signal vida_alterada(vida_atual: int, vida_maxima: int)
 signal morreu
@@ -23,7 +31,13 @@ var _anim_t := 0.0
 
 func _ready() -> void:
 	add_to_group("player")
-
+	camera.make_current()
+	camera.position_smoothing_enabled = true
+	camera.position_smoothing_speed = camera_smoothing_speed
+	camera.limit_left = camera_limit_left
+	camera.limit_top = camera_limit_top
+	camera.limit_right = camera_limit_right
+	camera.limit_bottom = camera_limit_bottom
 
 func _physics_process(delta: float) -> void:
 	if morto:
@@ -48,8 +62,22 @@ func tomar_dano(valor: int) -> void:
 		return
 	vida = max(vida - valor, 0)
 	vida_alterada.emit(vida, VIDA_MAXIMA)
+	_flash_dano()
 	if vida == 0:
 		morrer()
+
+
+var _flash_tween: Tween = null
+
+func _flash_dano() -> void:
+	if _sprite == null:
+		return
+	# Em dano rápido, mata o tween anterior para os tweens não disputarem o modulate.
+	if _flash_tween and _flash_tween.is_valid():
+		_flash_tween.kill()
+	_flash_tween = create_tween()
+	_flash_tween.tween_property(_sprite, "modulate", Color(1.6, 0.35, 0.35, 1.0), 0.06)
+	_flash_tween.tween_property(_sprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.22)
 
 
 func aplicar_knockback(forca: Vector2) -> void:
@@ -79,3 +107,24 @@ func morrer() -> void:
 	morto = true
 	velocity = Vector2.ZERO
 	morreu.emit()
+
+func shake(intensidade: float = 8.0, duracao: float = 0.2) -> void:
+	if _shake_tween != null:
+		_shake_tween.kill()
+		_shake_tween = null
+
+	camera.offset = Vector2.ZERO
+
+	_shake_tween = create_tween()
+	var steps: int = max(1, int(duracao / 0.03))
+
+	for i in range(steps):
+		var random_offset := Vector2(
+			randf_range(-intensidade, intensidade),
+			randf_range(-intensidade, intensidade)
+		)
+		_shake_tween.tween_property(camera, "offset", random_offset, 0.03)
+
+	_shake_tween.tween_property(camera, "offset", Vector2.ZERO, 0.05)
+	await _shake_tween.finished
+	_shake_tween = null
