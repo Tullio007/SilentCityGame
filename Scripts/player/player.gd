@@ -1,10 +1,12 @@
 extends CharacterBody2D
 @export var camera_limit_left: int = 0
 @export var camera_limit_top: int = 0
-@export var camera_limit_right: int = 3000
-@export var camera_limit_bottom: int = 2000
+@export var camera_limit_right: int = 3100
+@export var camera_limit_bottom: int = 560
 @export var camera_smoothing_speed: float = 5.0
 @onready var camera: Camera2D = $Camera2D
+
+var _shake_tween: Tween = null
 
 signal vida_alterada(vida_atual: int, vida_maxima: int)
 signal morreu
@@ -93,16 +95,22 @@ func morrer() -> void:
 	morreu.emit()
 
 func shake(intensidade: float = 8.0, duracao: float = 0.2) -> void:
-	var offset_original := camera.offset
-	var tempo := 0.0
+	if _shake_tween != null:
+		_shake_tween.kill()
+		_shake_tween = null
 
-	while tempo < duracao:
-		camera.offset = Vector2(
+	camera.offset = Vector2.ZERO
+
+	_shake_tween = create_tween()
+	var steps: int = max(1, int(duracao / 0.03))
+
+	for i in range(steps):
+		var random_offset := Vector2(
 			randf_range(-intensidade, intensidade),
 			randf_range(-intensidade, intensidade)
 		)
+		_shake_tween.tween_property(camera, "offset", random_offset, 0.03)
 
-		await get_tree().process_frame
-		tempo += get_process_delta_time()
-
-	camera.offset = offset_original
+	_shake_tween.tween_property(camera, "offset", Vector2.ZERO, 0.05)
+	await _shake_tween.finished
+	_shake_tween = null
