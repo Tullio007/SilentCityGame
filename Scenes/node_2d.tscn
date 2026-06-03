@@ -51,8 +51,6 @@ script = ExtResource("1_j2wod")
 
 [node name="Fundo" type="Sprite2D" parent="."]
 z_index = -10
-position = Vector2(0, -100)
-scale = Vector2(1.957, 0.982)
 texture = ExtResource("9_fundo")
 centered = false
 
