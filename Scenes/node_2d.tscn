@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bq1qhb13o0tqe"]
+[gd_scene load_steps=20 format=3 uid="uid://bq1qhb13o0tqe"]
 
 [ext_resource type="Script" path="res://node_2d.gd" id="1_j2wod"]
 [ext_resource type="Script" uid="uid://cevfrc0cqvlw4" path="res://Scripts/player/player.gd" id="2_v1qfn"]
@@ -9,6 +9,20 @@
 [ext_resource type="PackedScene" path="res://Scenes/npc.tscn" id="7_npc"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/lumi - Animação parado .png" id="8_lumi"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/cartão de acesso/sprite do cartão de acesso.png" id="9_chave_sprite"]
+[ext_resource type="Texture2D" path="res://Assets/Backgrounds/Fase 1/silent_district.png" id="9_fundo"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Oxanium/Oxanium-VariableFont_wght.ttf" id="10_oxanium"]
+
+[sub_resource type="FontVariation" id="FontVar_oxanium_eb"]
+base_font = ExtResource("10_oxanium")
+variation_opentype = {
+"wght": 800
+}
+
+[sub_resource type="FontVariation" id="FontVar_oxanium_sb"]
+base_font = ExtResource("10_oxanium")
+variation_opentype = {
+"wght": 600
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
 size = Vector2(32, 48)
@@ -35,6 +49,11 @@ border_color = Color(0, 0.85, 1, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_j2wod")
+
+[node name="Fundo" type="Sprite2D" parent="."]
+z_index = -10
+texture = ExtResource("9_fundo")
+centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -171,3 +190,63 @@ horizontal_alignment = 1
 
 [node name="Reiniciar" type="Button" parent="EndScreen/Panel/VBox"]
 text = "Jogar de novo"
+
+[node name="Intro" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+
+[node name="Wrapper" type="Control" parent="Intro"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Bg" type="ColorRect" parent="Intro/Wrapper"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+mouse_filter = 2
+
+[node name="TituloBox" type="Control" parent="Intro/Wrapper"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -560.0
+offset_top = -100.0
+offset_right = 560.0
+offset_bottom = 100.0
+mouse_filter = 2
+
+[node name="Titulo" type="Label" parent="Intro/Wrapper/TituloBox"]
+offset_left = 0.0
+offset_top = 20.0
+offset_right = 1120.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(0.91, 0.643, 0.337, 1)
+theme_override_colors/font_shadow_color = Color(0.45, 0.18, 0.08, 0.85)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = SubResource("FontVar_oxanium_eb")
+theme_override_font_sizes/font_size = 96
+text = "SILENT DISTRICT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitulo" type="Label" parent="Intro/Wrapper/TituloBox"]
+offset_left = 0.0
+offset_top = 150.0
+offset_right = 1120.0
+offset_bottom = 195.0
+theme_override_colors/font_color = Color(0.608, 0.784, 0.353, 1)
+theme_override_fonts/font = SubResource("FontVar_oxanium_sb")
+theme_override_font_sizes/font_size = 28
+text = "Capítulo Único"
+horizontal_alignment = 1
+vertical_alignment = 1
