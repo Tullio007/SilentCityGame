@@ -1,0 +1,30 @@
+[gd_resource type="Theme" format=3 uid="uid://bh2byfglkb0va"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wivnf"]
+bg_color = Color(0.27686453, 0.4780621, 0.5925112, 1)
+border_width_left = 10
+border_width_top = 2
+border_width_right = 10
+border_width_bottom = 2
+border_color = Color(0.54509807, 0.8235294, 0.9490196, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjdp7"]
+bg_color = Color(0.20904428, 0.37802485, 0.4736135, 1)
+border_width_left = 10
+border_width_top = 2
+border_width_right = 10
+border_width_bottom = 2
+border_color = Color(0.41540217, 0.76291245, 0.9124802, 1)
+border_blend = true
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(0.8980392, 0.8352941, 0.61960787, 1)
+Button/colors/font_hover_color = Color(0.8980392, 0.8352941, 0.61960787, 1)
+Button/colors/font_hover_pressed_color = Color(0.8980392, 0.8352941, 0.61960787, 1)
+Button/colors/font_pressed_color = Color(0.8980392, 0.8352941, 0.61960787, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_wivnf")
+Button/styles/hover = SubResource("StyleBoxFlat_wivnf")
+Button/styles/normal = SubResource("StyleBoxFlat_wivnf")
+Button/styles/pressed = SubResource("StyleBoxFlat_qjdp7")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bq1qhb13o0tqe"]
+[gd_scene load_steps=22 format=3 uid="uid://bq1qhb13o0tqe"]
 
 [ext_resource type="Script" path="res://node_2d.gd" id="1_j2wod"]
 [ext_resource type="Script" uid="uid://cevfrc0cqvlw4" path="res://Scripts/player/player.gd" id="2_v1qfn"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" path="res://Assets/Sprites/cartão de acesso/sprite do cartão de acesso.png" id="9_chave_sprite"]
 [ext_resource type="Texture2D" path="res://Assets/Backgrounds/Fase 1/silent_district.png" id="9_fundo"]
 [ext_resource type="FontFile" path="res://Assets/Fonts/Oxanium/Oxanium-VariableFont_wght.ttf" id="10_oxanium"]
+[ext_resource type="PackedScene" uid="uid://dhc6rtdhp4gcm" path="res://Scenes/pause_menu.tscn" id="11_pause"]
+[ext_resource type="Theme" uid="uid://bh2byfglkb0va" path="res://Scenes/UI/tema dos botões da tela.tres" id="12_botoes"]
 
 [sub_resource type="FontVariation" id="FontVar_oxanium_eb"]
 base_font = ExtResource("10_oxanium")
@@ -189,6 +191,7 @@ text = "FIM"
 horizontal_alignment = 1
 
 [node name="Reiniciar" type="Button" parent="EndScreen/Panel/VBox"]
+theme = ExtResource("12_botoes")
 text = "Jogar de novo"
 
 [node name="Intro" type="CanvasLayer" parent="."]
@@ -250,3 +253,5 @@ theme_override_font_sizes/font_size = 28
 text = "Capítulo Único"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="pause_menu" parent="." instance=ExtResource("11_pause")]
