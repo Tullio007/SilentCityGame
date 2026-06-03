@@ -46,4 +46,13 @@ func _abrir() -> void:
 	_aberta = true
 	aviso.visible = false
 	collision.set_deferred("disabled", true)
-	visible = false
+	_animar_abertura()
+
+
+func _animar_abertura() -> void:
+	var tween := create_tween().set_parallel(true)
+	tween.tween_property(self, "position:y", position.y - 130.0, 0.45) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "modulate:a", 0.0, 0.45) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.chain().tween_callback(func(): visible = false)

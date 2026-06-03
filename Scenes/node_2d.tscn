@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bq1qhb13o0tqe"]
+[gd_scene load_steps=20 format=3 uid="uid://bq1qhb13o0tqe"]
 
 [ext_resource type="Script" path="res://node_2d.gd" id="1_j2wod"]
 [ext_resource type="Script" uid="uid://cevfrc0cqvlw4" path="res://Scripts/player/player.gd" id="2_v1qfn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" path="res://Scripts/Items/chave.tres" id="6_chave"]
 [ext_resource type="PackedScene" path="res://Scenes/npc.tscn" id="7_npc"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/lumi - Animação parado .png" id="8_lumi"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/cartão de acesso/sprite do cartão de acesso.png" id="9_chave_sprite"]
 [ext_resource type="Texture2D" path="res://Assets/Backgrounds/Fase 1/silent_district.png" id="9_fundo"]
 [ext_resource type="FontFile" path="res://Assets/Fonts/Oxanium/Oxanium-VariableFont_wght.ttf" id="10_oxanium"]
 
@@ -140,12 +141,9 @@ position = Vector2(2400, 388)
 script = ExtResource("5_pickup")
 item_data = ExtResource("6_chave")
 
-[node name="Body" type="ColorRect" parent="ChavePickup"]
-offset_left = -12.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = 12.0
-color = Color(1, 0.85, 0.1, 1)
+[node name="Sprite" type="Sprite2D" parent="ChavePickup"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_chave_sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChavePickup"]
 shape = SubResource("RectangleShape2D_pickup")

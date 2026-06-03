@@ -48,8 +48,22 @@ func tomar_dano(valor: int) -> void:
 		return
 	vida = max(vida - valor, 0)
 	vida_alterada.emit(vida, VIDA_MAXIMA)
+	_flash_dano()
 	if vida == 0:
 		morrer()
+
+
+var _flash_tween: Tween = null
+
+func _flash_dano() -> void:
+	if _sprite == null:
+		return
+	# Em dano rápido, mata o tween anterior para os tweens não disputarem o modulate.
+	if _flash_tween and _flash_tween.is_valid():
+		_flash_tween.kill()
+	_flash_tween = create_tween()
+	_flash_tween.tween_property(_sprite, "modulate", Color(1.6, 0.35, 0.35, 1.0), 0.06)
+	_flash_tween.tween_property(_sprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.22)
 
 
 func aplicar_knockback(forca: Vector2) -> void:
