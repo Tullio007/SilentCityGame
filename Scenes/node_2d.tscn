@@ -196,6 +196,7 @@ horizontal_alignment = 1
 text = "Jogar de novo"
 
 [node name="Intro" type="CanvasLayer" parent="."]
+process_mode = 3
 layer = 10
 
 [node name="Wrapper" type="Control" parent="Intro"]
