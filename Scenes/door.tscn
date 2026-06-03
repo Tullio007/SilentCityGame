@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://Scripts/door.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://ccd88ruk5u4ip" path="res://Assets/Audio/SFX/world/door_open.ogg" id="2_sfx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
 size = Vector2(32, 120)
@@ -55,9 +56,18 @@ shape = SubResource("RectangleShape2D_door")
 shape = SubResource("RectangleShape2D_area")
 
 [node name="Aviso" type="Label" parent="."]
-offset_left = -90.0
-offset_top = -110.0
-offset_right = 90.0
-offset_bottom = -80.0
+offset_left = -110.0
+offset_top = -112.0
+offset_right = 110.0
+offset_bottom = -82.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "Trancada — falta a Chave de Acesso"
 horizontal_alignment = 1
-text = "Está trancada. Falta uma chave."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AbrirSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_sfx")
+volume_db = -4.0
