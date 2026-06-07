@@ -1,4 +1,4 @@
-# Silent City 🤖
+# Silent City 
 
 > Plataforma 2D narrativa em Pixel Art — projeto acadêmico
 
