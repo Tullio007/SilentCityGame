@@ -61,7 +61,7 @@ A entrega atual implementa **uma fase jogável** com início, meio e fim:
 | Meio | 3 mobs hostis que causam dano ao encostar no player |
 | Fim | Coletar chave → abrir porta trancada → tela de "Fim" |
 
-As 5 fases completas e o confronto com o vilão **R-01** estão fora do escopo desta entrega.
+As 5 fases completas e o confronto com o vilão **Nox** estão fora do escopo desta entrega.
 
 ---
 
