@@ -35,7 +35,10 @@ func _ready() -> void:
 func _apply_styles() -> void:
 	background.add_theme_stylebox_override("panel", _make_panel_style(COLOR_BG_MAIN, COLOR_BORDER_CYAN, 2))
 
-	title_label.text = "[ INVENTÁRIO ]"
+	# O sufixo deixa explícito (em texto, não só por agrupamento visual) que a
+	# lista é ordenada pelo Merge Sort do inventário: memórias primeiro, depois
+	# em ordem alfabética.
+	title_label.text = "[ INVENTÁRIO ]   ·   ordenado: memórias › nome"
 	title_label.add_theme_color_override("font_color", COLOR_BORDER_CYAN)
 	title_label.add_theme_font_size_override("font_size", 16)
 
@@ -110,7 +113,8 @@ func _refresh_slots() -> void:
 	for child in slots_grid.get_children():
 		child.queue_free()
 
-	for item in Inventory.get_all_items():
+	# Lista ordenada pelo Merge Sort estável do inventário (ver inventory.gd).
+	for item in Inventory.get_sorted_items():
 		var slot: Panel = ItemSlotScene.instantiate()
 		slots_grid.add_child(slot)
 		slot.set_item(item)
