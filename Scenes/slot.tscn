@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cht5ahxhfg2du"]
+
+[ext_resource type="Texture2D" uid="uid://bxw3m73mewssb" path="res://Assets/Backgrounds/inventario/Slots.png" id="1_12ej0"]
+[ext_resource type="Script" uid="uid://0te3vx04ot3d" path="res://Scripts/slot.gd" id="1_67ou1"]
+
+[node name="slot" type="Control" unique_id=471490221]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1092.0
+offset_bottom = -588.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_67ou1")
+
+[node name="background" type="TextureRect" parent="." unique_id=1776625828]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_12ej0")
+expand_mode = 1
+
+[node name="sprits" type="TextureRect" parent="." unique_id=1074237859]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="quantidade" type="Label" parent="." unique_id=1154926071]
+custom_minimum_size = Vector2(0.5, 0.5)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -1.0
+offset_bottom = 3.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.69, 0.69)
+horizontal_alignment = 2

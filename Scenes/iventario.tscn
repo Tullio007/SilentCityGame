@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dp0hjuf7hlu64"]
+
+[ext_resource type="Texture2D" uid="uid://qyr0780o4jpk" path="res://Assets/Backgrounds/inventario/fundo do inventario.png" id="1_2esvo"]
+[ext_resource type="PackedScene" uid="uid://cht5ahxhfg2du" path="res://Scenes/slot.tscn" id="2_khds4"]
+[ext_resource type="Texture2D" uid="uid://c5f3ej23f6tpf" path="res://Assets/Sprites/cartão de acesso/sprite do cartão de acesso.png" id="3_3d3od"]
+
+[node name="iventario" type="TextureRect" unique_id=301529634]
+self_modulate = Color(1, 1, 1, 0.69411767)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -260.0
+offset_right = 440.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("1_2esvo")
+expand_mode = 1
+
+[node name="Container" type="GridContainer" parent="." unique_id=1710903946]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.0
+offset_top = -24.0
+offset_right = 268.0
+offset_bottom = 336.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 8
+
+[node name="slot1" parent="Container" unique_id=471490221 instance=ExtResource("2_khds4")]
+layout_mode = 2
+
+[node name="sprits" parent="Container/slot1" index="1" unique_id=1074237859]
+texture = ExtResource("3_3d3od")
+
+[node name="quantidade" parent="Container/slot1" index="2" unique_id=1154926071]
+text = "1"
+
+[node name="slot2" parent="Container" unique_id=1898760867 instance=ExtResource("2_khds4")]
+layout_mode = 2
+
+[node name="slot3" parent="Container" unique_id=1541487165 instance=ExtResource("2_khds4")]
+layout_mode = 2
+
+[node name="slot4" parent="Container" unique_id=1012483447 instance=ExtResource("2_khds4")]
+layout_mode = 2
+
+[node name="slot5" parent="Container" unique_id=1846922684 instance=ExtResource("2_khds4")]
+layout_mode = 2
+
+[node name="slot6" parent="Container" unique_id=459183420 instance=ExtResource("2_khds4")]
+layout_mode = 2
+
+[node name="slot7" parent="Container" unique_id=64038413 instance=ExtResource("2_khds4")]
+layout_mode = 2
+
+[node name="slot8" parent="Container" unique_id=1138667928 instance=ExtResource("2_khds4")]
+layout_mode = 2
+
+[editable path="Container/slot1"]
+[editable path="Container/slot2"]
+[editable path="Container/slot3"]
