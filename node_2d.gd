@@ -1,5 +1,8 @@
 extends Node2D
 
+## Número da fase, usado para escolher a trilha sonora correta via AudioManager.
+@export var phase_number: int = 1
+
 @onready var player: CharacterBody2D = $CharacterBody2D
 @onready var health_bar: ProgressBar = $CanvasLayer/HealthBar
 @onready var end_screen: CanvasLayer = $EndScreen
@@ -24,7 +27,9 @@ func _ready() -> void:
 	# Pula a intro se o jogador já a viu nesta sessão (ex.: após "Jogar de novo").
 	if GameState.get_flag("intro_vista"):
 		intro.queue_free()
+		AudioManager.play_phase_music(phase_number)
 	else:
+		AudioManager.play_intro_music()
 		_animar_intro()
 
 
@@ -60,6 +65,7 @@ func _finalizar_intro() -> void:
 	GameState.set_flag("intro_vista", true)
 	get_tree().paused = false
 	intro.queue_free()
+	AudioManager.play_phase_music(phase_number)
 
 
 func _on_vida_alterada(vida_atual: int, _vida_max: int) -> void:
@@ -67,11 +73,13 @@ func _on_vida_alterada(vida_atual: int, _vida_max: int) -> void:
 
 
 func _on_player_morreu() -> void:
+	AudioManager.play_game_over_music()
 	_mostrar_fim("VOCÊ FALHOU")
 
 
 func _on_win_zone_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
+		AudioManager.play_credits_music()
 		_mostrar_fim("FIM")
 
 

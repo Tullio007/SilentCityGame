@@ -44,6 +44,7 @@ func _atacar(player: Node) -> void:
 	if not _pode_dar_dano or not player.has_method("tomar_dano"):
 		return
 	_pode_dar_dano = false
+	AudioManager.play_lumi_attack()
 	player.tomar_dano(dano)
 	if player.has_method("aplicar_knockback"):
 		var dir := signf(player.global_position.x - global_position.x)

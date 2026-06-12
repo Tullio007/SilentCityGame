@@ -12,13 +12,15 @@ func _process(delta: float) -> void:
 
 
 func _on_start_pressed() -> void:
+	AudioManager.play_button_click()
 	get_tree().change_scene_to_file("res://Scenes/node_2d.tscn")
-	
+
 
 
 func _on_credits_pressed() -> void:
-	pass # Replace with function body.
+	AudioManager.play_button_click()
 
 
 func _on_quit_pressed() -> void:
+	AudioManager.play_button_click()
 	get_tree().quit()

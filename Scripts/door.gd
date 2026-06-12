@@ -97,6 +97,7 @@ func _abrir() -> void:
 	_aberta = true
 	aviso.visible = false
 	_luz.color = _COR_ABERTA
+	AudioManager.play_door_open()
 	if _sfx.stream != null:
 		_sfx.play()
 	# Diferido: alterar colisão dentro de callbacks de física/sinal exige set_deferred.

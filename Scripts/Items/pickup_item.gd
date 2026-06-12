@@ -32,6 +32,10 @@ func collect() -> void:
 		return
 
 	if Inventory.add_item(item_data):
+		if item_data.id.to_lower().contains("vida") or item_data.id.to_lower().contains("health"):
+			AudioManager.play_health_pickup()
+		else:
+			AudioManager.play_item_pickup()
 		_animar_coleta()
 	else:
 		print("Inventário cheio")

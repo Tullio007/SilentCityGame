@@ -175,13 +175,13 @@ func play_sfx_path(path: String):
 
 func play_horde_complete():
 	play_sfx_path(
-		SFX_BASE + "World/horde_complete.ogg"
+		SFX_BASE + "world/horde_complete.ogg"
 	)
 
 
 func play_door_open():
 	play_sfx_path(
-		SFX_BASE + "World/door_open.ogg"
+		SFX_BASE + "world/door_open.ogg"
 	)
 
 # =====================================================
@@ -190,13 +190,13 @@ func play_door_open():
 
 func play_mob1_attack():
 	play_sfx_path(
-		SFX_BASE + "Enemies/mob1/attack.ogg"
+		SFX_BASE + "enemies/mob1/attack.ogg"
 	)
 
 
 func play_mob1_death():
 	play_sfx_path(
-		SFX_BASE + "Enemies/mob1/death.ogg"
+		SFX_BASE + "enemies/mob1/death.ogg"
 	)
 
 # =====================================================
@@ -205,13 +205,13 @@ func play_mob1_death():
 
 func play_mob2_attack():
 	play_sfx_path(
-		SFX_BASE + "Enemies/mob2/attack.ogg"
+		SFX_BASE + "enemies/mob2/attack.ogg"
 	)
 
 
 func play_mob2_death():
 	play_sfx_path(
-		SFX_BASE + "Enemies/mob2/death.ogg"
+		SFX_BASE + "enemies/mob2/death.ogg"
 	)
 
 # =====================================================
@@ -220,13 +220,13 @@ func play_mob2_death():
 
 func play_mob3_attack():
 	play_sfx_path(
-		SFX_BASE + "Enemies/mob3/attack.ogg"
+		SFX_BASE + "enemies/mob3/attack.ogg"
 	)
 
 
 func play_mob3_death():
 	play_sfx_path(
-		SFX_BASE + "Enemies/mob3/death.ogg"
+		SFX_BASE + "enemies/mob3/death.ogg"
 	)
 
 # =====================================================
@@ -235,13 +235,13 @@ func play_mob3_death():
 
 func play_nox_attack():
 	play_sfx_path(
-		SFX_BASE + "Enemies/nox/attack.ogg"
+		SFX_BASE + "enemies/Nox/attack.ogg"
 	)
 
 
 func play_nox_defeat():
 	play_sfx_path(
-		SFX_BASE + "World/horde_complete.ogg"
+		SFX_BASE + "world/horde_complete.ogg"
 	)
 
 # =====================================================
@@ -250,25 +250,25 @@ func play_nox_defeat():
 
 func play_lumi_attack():
 	play_sfx_path(
-		SFX_BASE + "Lumi/attack.ogg"
+		SFX_BASE + "lumi/attack.ogg"
 	)
 
 
 func play_lumi_hurt():
 	play_sfx_path(
-		SFX_BASE + "Lumi/hurt.ogg"
+		SFX_BASE + "lumi/hurt.ogg"
 	)
 
 
 func play_item_pickup():
 	play_sfx_path(
-		SFX_BASE + "Lumi/item_pickup.ogg"
+		SFX_BASE + "lumi/item_pickup.ogg"
 	)
 
 
 func play_health_pickup():
 	play_sfx_path(
-		SFX_BASE + "Lumi/health_pickup.ogg"
+		SFX_BASE + "lumi/health_pickup.ogg"
 	)
 
 # =====================================================
@@ -277,11 +277,11 @@ func play_health_pickup():
 
 func play_button_click():
 	play_sfx_path(
-		SFX_BASE + "UI/button_click.ogg"
+		SFX_BASE + "ui/button_click.ogg"
 	)
 
 
 func play_dialogue_skip():
 	play_sfx_path(
-		SFX_BASE + "UI/dialogue_skip.ogg"
+		SFX_BASE + "ui/dialogue_skip.ogg"
 	)

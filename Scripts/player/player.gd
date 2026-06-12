@@ -62,6 +62,7 @@ func tomar_dano(valor: int) -> void:
 		return
 	vida = max(vida - valor, 0)
 	vida_alterada.emit(vida, VIDA_MAXIMA)
+	AudioManager.play_lumi_hurt()
 	_flash_dano()
 	if vida == 0:
 		morrer()
