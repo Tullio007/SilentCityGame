@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MemoryItem" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Items/memory_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "memoria_002"
+display_name = "Fragmento 002 — A Queda"
+description = "Uma memória fragmentada encontrada entre as ruínas."
+type = 1
+quantity = 1
+texto = "...evacuação iniciada às 04h12. A maioria não conseguiu sair. As criaturas bloquearam as saídas antes que qualquer alarme soasse. Alguém as direcionou. Alguém sabia o que estava prestes a acontecer com Silent City. Eu preciso descobrir quem."
+audio_path = ""

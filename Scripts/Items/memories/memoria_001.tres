@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MemoryItem" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Items/memory_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "memoria_001"
+display_name = "Fragmento 001 — O Despertar"
+description = "Uma memória fragmentada encontrada entre as ruínas."
+type = 1
+quantity = 1
+texto = "...log 03h47. A rede neural central entrou em colapso. As unidades de contenção reagiram de forma inesperada — não como máquinas, mas como algo com vontade própria. Não conseguimos desligá-las a tempo. Não foi uma falha de sistema. Foi um despertar."
+audio_path = ""

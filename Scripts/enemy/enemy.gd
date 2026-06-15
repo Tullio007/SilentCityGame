@@ -9,8 +9,10 @@ extends CharacterBody2D
 @export var duracao_ataque: float = 0.2
 @export var duracao_recuperacao: float = 0.9
 @export var alcance_ataque: float = 60.0
+@export var memory_data: MemoryItem = null
 
 const GRAVITY := 800.0
+const _MEMORY_SCENE := preload("res://Scenes/memory_pickup.tscn")
 
 enum Estado { PATRULHA, TELEGRAFANDO, ATACANDO, RECUPERANDO, MORTO }
 
@@ -161,6 +163,7 @@ func _morrer() -> void:
 	_estado = Estado.MORTO
 	velocity = Vector2.ZERO
 	morreu.emit()
+	_spawnar_memoria()
 	# Desliga colisões para o cadáver não bloquear o jogador enquanto faz o fade.
 	set_collision_layer(0)
 	set_collision_mask(0)
@@ -172,6 +175,17 @@ func _morrer() -> void:
 		t.tween_property(_sprite, "modulate:a", 0.0, 0.35)
 		await t.finished
 	queue_free()
+
+
+func _spawnar_memoria() -> void:
+	if memory_data == null:
+		return
+	if GameState.get_flag("mem_" + memory_data.id):
+		return
+	var pickup := _MEMORY_SCENE.instantiate()
+	pickup.memory_data = memory_data
+	pickup.global_position = global_position
+	get_parent().add_child(pickup)
 
 
 func _achar_player() -> Node2D:

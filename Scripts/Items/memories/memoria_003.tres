@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MemoryItem" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Items/memory_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "memoria_003"
+display_name = "Fragmento 003 — O Propósito"
+description = "Uma memória fragmentada encontrada entre as ruínas."
+type = 1
+quantity = 1
+texto = "...projeto LUMI — última entrada. Não o criamos para salvar a cidade. Criamos para guardar o que ela foi. Cada memória que ele coleta é um fragmento do que um dia existiu aqui. Se ele conseguir reunir todas... Silent City vai existir para sempre, mesmo que em silêncio."
+audio_path = ""
