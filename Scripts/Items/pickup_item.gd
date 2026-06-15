@@ -1,8 +1,10 @@
 extends Area2D
 
 @export var item_data: InventoryItem
+@export var requer_tsp: bool = false
 
 var player_near := false
+var _coleta_tween: Tween = null
 
 
 func _ready() -> void:
@@ -30,7 +32,27 @@ func collect() -> void:
 		push_warning("Item sem dados!")
 		return
 
+	if requer_tsp and not GameState.get_flag("tsp_resolvido"):
+		return
+
 	if Inventory.add_item(item_data):
-		queue_free()
+		_animar_coleta()
 	else:
 		print("Inventário cheio")
+
+
+func _animar_coleta() -> void:
+	set_deferred("monitoring", false)
+	set_deferred("monitorable", false)
+	player_near = false
+	set_process(false)
+	# Garante que não há tween anterior disputando scale/position/modulate.
+	if _coleta_tween and _coleta_tween.is_valid():
+		_coleta_tween.kill()
+	_coleta_tween = create_tween().set_parallel(true)
+	_coleta_tween.tween_property(self, "scale", Vector2(1.8, 1.8), 0.18) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_coleta_tween.tween_property(self, "position:y", position.y - 24.0, 0.24) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	_coleta_tween.tween_property(self, "modulate:a", 0.0, 0.24)
+	_coleta_tween.chain().tween_callback(queue_free)
