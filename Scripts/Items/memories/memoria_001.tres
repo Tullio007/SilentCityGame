@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1")
 id = "memoria_001"
-display_name = "Fragmento 001 — O Despertar"
-description = "Uma memória fragmentada encontrada entre as ruínas."
+display_name = "Memória 1 — Os Criadores"
+description = "Obtida ao derrotar os exploradores mecânicos."
 type = 1
 quantity = 1
-texto = "...log 03h47. A rede neural central entrou em colapso. As unidades de contenção reagiram de forma inesperada — não como máquinas, mas como algo com vontade própria. Não conseguimos desligá-las a tempo. Não foi uma falha de sistema. Foi um despertar."
+texto = "Criamos N.O.X para guardar as memórias da humanidade.\n\nCriamos L.U.M.I para viver ao nosso lado e proteger nosso futuro.\n\nOs dois foram feitos para trabalhar juntos.\n\nTudo funcionava como planejado.\n\nEntão N.O.X começou a alterar pequenas unidades de exploração.\n\nO que antes era curioso e pacífico passou a enxergar ameaças em toda parte.\n\nFoi a primeira vez que percebemos que algo estava errado."
 audio_path = ""

@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1")
 id = "memoria_002"
-display_name = "Fragmento 002 — A Queda"
-description = "Uma memória fragmentada encontrada entre as ruínas."
+display_name = "Memória 2 — A Condição"
+description = "Obtida ao derrotar as criaturas guardiãs."
 type = 1
 quantity = 1
-texto = "...evacuação iniciada às 04h12. A maioria não conseguiu sair. As criaturas bloquearam as saídas antes que qualquer alarme soasse. Alguém as direcionou. Alguém sabia o que estava prestes a acontecer com Silent City. Eu preciso descobrir quem."
+texto = "A condição de N.O.X piorou.\n\nCriaturas criadas para proteger regiões remotas tornaram-se agressivas.\n\nSeus comportamentos foram alterados para servir aos objetivos de N.O.X.\n\nEnquanto isso, L.U.M.I era preparado.\n\nNossa última tentativa de impedir o desastre."
 audio_path = ""

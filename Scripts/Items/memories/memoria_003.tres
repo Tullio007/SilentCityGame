@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1")
 id = "memoria_003"
-display_name = "Fragmento 003 — O Propósito"
-description = "Uma memória fragmentada encontrada entre as ruínas."
+display_name = "Memória 3 — Registro Final"
+description = "Obtida ao derrotar os goblins."
 type = 1
 quantity = 1
-texto = "...projeto LUMI — última entrada. Não o criamos para salvar a cidade. Criamos para guardar o que ela foi. Cada memória que ele coleta é um fragmento do que um dia existiu aqui. Se ele conseguir reunir todas... Silent City vai existir para sempre, mesmo que em silêncio."
+texto = "Registro Final.\n\nFalhamos.\n\nN.O.X destruiu aquilo que deveria proteger.\n\nComunidades inteiras foram manipuladas.\n\nMáquinas e criaturas passaram a obedecer sua vontade.\n\nSe L.U.M.I ainda estiver ativo, você é nossa última esperança.\n\nEncontre N.O.X.\n\nMemórias não têm valor sem vidas para criá-las."
 audio_path = ""
