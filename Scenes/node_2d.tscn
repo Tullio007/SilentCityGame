@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Items/pickup_item.gd" id="5_pickup"]
 [ext_resource type="Resource" path="res://Scripts/Items/chave.tres" id="6_chave"]
 [ext_resource type="PackedScene" path="res://Scenes/npc.tscn" id="7_npc"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/lumi - Animação parado .png" id="8_lumi"]
+[ext_resource type="Texture2D" uid="uid://d3vg3j4c7nmt3" path="res://Assets/Sprites/lumi sprites/lumi - Animação parado .png" id="8_lumi"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/cartão de acesso/sprite do cartão de acesso.png" id="9_chave_sprite"]
 [ext_resource type="Texture2D" path="res://Assets/Backgrounds/Fase 1/silent_district.png" id="9_fundo"]
 [ext_resource type="FontFile" path="res://Assets/Fonts/Oxanium/Oxanium-VariableFont_wght.ttf" id="10_oxanium"]

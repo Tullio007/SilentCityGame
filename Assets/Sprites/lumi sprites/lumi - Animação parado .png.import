@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3vg3j4c7nmt3"
-path="res://.godot/imported/lumi - Animação parado .png-9d75a73ea20e398dc07b8d12077e5695.ctex"
+path="res://.godot/imported/lumi - Animação parado .png-69d21010e68b129742f1c1ba1bae074e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/lumi - Animação parado .png"
-dest_files=["res://.godot/imported/lumi - Animação parado .png-9d75a73ea20e398dc07b8d12077e5695.ctex"]
+source_file="res://Assets/Sprites/lumi sprites/lumi - Animação parado .png"
+dest_files=["res://.godot/imported/lumi - Animação parado .png-69d21010e68b129742f1c1ba1bae074e.ctex"]
 
 [params]
 
