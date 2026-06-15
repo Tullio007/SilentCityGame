@@ -15,9 +15,13 @@ const SPEED = 200.0
 const GRAVITY = 800.0
 const JUMP_FORCE = -400.0
 const VIDA_MAXIMA = 100
+const COOLDOWN_TIRO := 0.35
+const PROJECTILE_SCENE := preload("res://Scenes/projectile.tscn")
 
 var vida := VIDA_MAXIMA
 var morto := false
+var _olhando := 1.0
+var _pode_atirar := true
 
 # Animação: só existe o spritesheet "parado" (idle, 8 frames). Sem folha de
 # caminhada, animamos os frames do idle (mais rápido ao andar) e viramos o sprite.
@@ -49,12 +53,29 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	velocity.x = direction * SPEED
 
+	if direction != 0.0:
+		_olhando = signf(direction)
+
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_FORCE
+
+	if Input.is_action_just_pressed("attack") and _pode_atirar:
+		_atirar()
 
 	_animar(delta, direction)
 
 	move_and_slide()
+
+
+func _atirar() -> void:
+	_pode_atirar = false
+	var proj := PROJECTILE_SCENE.instantiate()
+	# Spawn ligeiramente à frente e na altura do tronco para evitar tocar o chão.
+	var origem := global_position + Vector2(_olhando * 24.0, -10.0)
+	proj.configurar(_olhando, origem)
+	get_parent().add_child(proj)
+	await get_tree().create_timer(COOLDOWN_TIRO).timeout
+	_pode_atirar = true
 
 
 func tomar_dano(valor: int) -> void:
