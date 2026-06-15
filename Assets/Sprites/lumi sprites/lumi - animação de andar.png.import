@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3vg3j4c7nmt3"
-path="res://.godot/imported/lumi - Animação parado .png-9d75a73ea20e398dc07b8d12077e5695.ctex"
+uid="uid://n3jeh04vbw8j"
+path="res://.godot/imported/lumi - animação de andar.png-52db8e361ff30a1f2a629a63b816d89d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/lumi - Animação parado .png"
-dest_files=["res://.godot/imported/lumi - Animação parado .png-9d75a73ea20e398dc07b8d12077e5695.ctex"]
+source_file="res://Assets/Sprites/lumi sprites/lumi - animação de andar.png"
+dest_files=["res://.godot/imported/lumi - animação de andar.png-52db8e361ff30a1f2a629a63b816d89d.ctex"]
 
 [params]
 
