@@ -6,7 +6,7 @@
 script = ExtResource("1")
 id = "memoria_002"
 display_name = "Memória 2 — A Condição"
-description = "Obtida ao derrotar as criaturas guardiãs."
+description = "Obtida ao derrotar a horda de dinossauros."
 type = 1
 quantity = 1
 texto = "A condição de N.O.X piorou.\n\nCriaturas criadas para proteger regiões remotas tornaram-se agressivas.\n\nSeus comportamentos foram alterados para servir aos objetivos de N.O.X.\n\nEnquanto isso, L.U.M.I era preparado.\n\nNossa última tentativa de impedir o desastre."

@@ -6,7 +6,7 @@
 script = ExtResource("1")
 id = "memoria_003"
 display_name = "Memória 3 — Registro Final"
-description = "Obtida ao derrotar os goblins."
+description = "Obtida ao derrotar a horda de goblins."
 type = 1
 quantity = 1
 texto = "Registro Final.\n\nFalhamos.\n\nN.O.X destruiu aquilo que deveria proteger.\n\nComunidades inteiras foram manipuladas.\n\nMáquinas e criaturas passaram a obedecer sua vontade.\n\nSe L.U.M.I ainda estiver ativo, você é nossa última esperança.\n\nEncontre N.O.X.\n\nMemórias não têm valor sem vidas para criá-las."

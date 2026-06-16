@@ -135,14 +135,17 @@ position = Vector2(320, 392)
 
 [node name="Mob1" parent="." instance=ExtResource("3_enemy")]
 position = Vector2(650, 402)
+horde_group = "horde_insetos"
 memory_data = ExtResource("14_mem1")
 
 [node name="Mob2" parent="." instance=ExtResource("3_enemy")]
 position = Vector2(1400, 402)
+horde_group = "horde_dinos"
 memory_data = ExtResource("15_mem2")
 
 [node name="Mob3" parent="." instance=ExtResource("3_enemy")]
 position = Vector2(2050, 402)
+horde_group = "horde_goblins"
 memory_data = ExtResource("16_mem3")
 
 [node name="ChavePickup" type="Area2D" parent="."]
