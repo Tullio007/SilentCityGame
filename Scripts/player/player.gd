@@ -69,6 +69,7 @@ func _physics_process(delta: float) -> void:
 
 func _atirar() -> void:
 	_pode_atirar = false
+	AudioManager.play_lumi_attack()
 	var proj := PROJECTILE_SCENE.instantiate()
 	# Spawn ligeiramente à frente e na altura do tronco para evitar tocar o chão.
 	var origem := global_position + Vector2(_olhando * 24.0, -10.0)

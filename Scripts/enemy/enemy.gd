@@ -9,6 +9,8 @@ extends CharacterBody2D
 @export var duracao_ataque: float = 0.2
 @export var duracao_recuperacao: float = 0.9
 @export var alcance_ataque: float = 60.0
+## Caminho do SFX de ataque deste mob (ex: "res://Assets/Audio/SFX/enemies/mob1/attack.ogg").
+@export var sfx_attack_path: String = ""
 ## Grupo da horda (ex: "horde_insetos"). Todos os inimigos da mesma horda
 ## devem ter o mesmo valor. A memória dropa quando o último morrer.
 @export var horde_group: String = ""
@@ -86,6 +88,8 @@ func _entrar_telegraph() -> void:
 	_estado = Estado.TELEGRAFANDO
 	_tempo_estado = 0.0
 	velocity.x = 0.0
+	if not sfx_attack_path.is_empty():
+		AudioManager.play_sfx_path(sfx_attack_path)
 	_aviso_telegraph()
 
 
