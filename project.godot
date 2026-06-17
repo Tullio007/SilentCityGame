@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="SilentCityGame"
-run/main_scene="uid://bq1qhb13o0tqe"
+run/main_scene="uid://dr7xlqdp3tihw"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [audio]
