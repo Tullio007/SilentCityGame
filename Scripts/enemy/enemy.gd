@@ -21,6 +21,19 @@ extends CharacterBody2D
 const GRAVITY := 800.0
 const _MEMORY_SCENE := preload("res://Scenes/memory_pickup.tscn")
 
+# Animação do inseto (a mesma arte é usada por todas as hordas).
+# Folhas 2 colunas; frames 392x246 (a textura andar é a default na cena).
+const _TEX_ANDAR := preload("res://Assets/Sprites/Mobs/Mob1_andar.png")
+const _TEX_ATAQUE := preload("res://Assets/Sprites/Mobs/Mob1_attack.png")
+const _ANDAR_V := 5
+const _ANDAR_N := 10
+const _ANDAR_DT := 0.09
+const _ATAQUE_V := 4
+const _ATAQUE_N := 8
+const _ATAQUE_DT := 0.08
+var _anim_t := 0.0
+var _anim_frame := 0
+
 enum Estado { PATRULHA, TELEGRAFANDO, ATACANDO, RECUPERANDO, MORTO }
 
 signal morreu
@@ -61,10 +74,32 @@ func _physics_process(delta: float) -> void:
 		Estado.MORTO:
 			velocity.x = 0.0
 
-	if _sprite and _estado != Estado.MORTO:
-		_sprite.scale.x = absf(_sprite.scale.x) * _direcao
+	_animar_mob(delta)
 
 	move_and_slide()
+
+
+func _animar_mob(delta: float) -> void:
+	if _sprite == null or _estado == Estado.MORTO:
+		return
+	# Folha de ataque durante telegraph/ataque; senão, folha de andar.
+	var atacando := _estado == Estado.TELEGRAFANDO or _estado == Estado.ATACANDO
+	var tex: Texture2D = _TEX_ATAQUE if atacando else _TEX_ANDAR
+	var total: int = _ATAQUE_N if atacando else _ANDAR_N
+	var passo: float = _ATAQUE_DT if atacando else _ANDAR_DT
+	if _sprite.texture != tex:
+		_sprite.texture = tex
+		_sprite.hframes = 2
+		_sprite.vframes = _ATAQUE_V if atacando else _ANDAR_V
+		_anim_frame = 0
+		_sprite.frame = 0
+	_anim_t += delta
+	if _anim_t >= passo:
+		_anim_t -= passo
+		_anim_frame = (_anim_frame + 1) % total
+		_sprite.frame = _anim_frame
+	# Flip horizontal preservando a magnitude da escala (definida na cena).
+	_sprite.scale.x = absf(_sprite.scale.x) * _direcao
 
 
 func _processar_patrulha() -> void:
