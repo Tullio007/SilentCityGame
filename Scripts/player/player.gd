@@ -23,12 +23,31 @@ var morto := false
 var _olhando := 1.0
 var _pode_atirar := true
 
-# Animação: só existe o spritesheet "parado" (idle, 8 frames). Sem folha de
-# caminhada, animamos os frames do idle (mais rápido ao andar) e viramos o sprite.
-const _FRAMES_IDLE := 8
-const _FRAME_TIME_PARADO := 0.16
-const _FRAME_TIME_ANDANDO := 0.08
+# Animação por troca de textura no Sprite2D. As três folhas têm frames
+# 2048x2048 e posicionam o robô na mesma região da célula, então a escala e o
+# offset do nó (definidos na cena) servem para idle / andar / tiro.
+const _TEX_IDLE  := preload("res://Assets/Sprites/lumi sprites/lumi - Animação parado .png")
+const _TEX_ANDAR := preload("res://Assets/Sprites/lumi sprites/lumi - animação de andar.png")
+const _TEX_TIRO  := preload("res://Assets/Sprites/lumi sprites/lumi tiro .png")
+
+# Grade (hframes x vframes) e nº de frames usáveis de cada folha. Constantes
+# tipadas de propósito (sem Dictionary/Variant) para não recriar bug de inferência.
+const _IDLE_H := 3
+const _IDLE_V := 3
+const _IDLE_N := 8
+const _IDLE_DT := 0.16
+const _ANDAR_H := 3
+const _ANDAR_V := 4
+const _ANDAR_N := 10
+const _ANDAR_DT := 0.08
+const _TIRO_H := 3
+const _TIRO_V := 3
+const _TIRO_N := 8
+
 var _anim_t := 0.0
+var _anim_frame := 0
+var _atirando := false
+var _tiro_dt := 0.05
 
 @onready var _sprite: Sprite2D = get_node_or_null("Sprite")
 
@@ -69,6 +88,11 @@ func _physics_process(delta: float) -> void:
 
 func _atirar() -> void:
 	_pode_atirar = false
+	# Dispara a animação de tiro: 8 frames distribuídos ao longo do cooldown.
+	_atirando = true
+	_anim_frame = 0
+	_anim_t = 0.0
+	_tiro_dt = COOLDOWN_TIRO / float(_TIRO_N)
 	AudioManager.play_lumi_attack()
 	var proj := PROJECTILE_SCENE.instantiate()
 	# Spawn ligeiramente à frente e na altura do tronco para evitar tocar o chão.
@@ -77,6 +101,7 @@ func _atirar() -> void:
 	get_parent().add_child(proj)
 	await get_tree().create_timer(COOLDOWN_TIRO).timeout
 	_pode_atirar = true
+	_atirando = false
 
 
 func tomar_dano(valor: int) -> void:
@@ -107,6 +132,16 @@ func aplicar_knockback(forca: Vector2) -> void:
 	velocity = forca
 
 
+func _set_sheet(tex: Texture2D, h: int, v: int) -> void:
+	if _sprite.texture == tex:
+		return
+	_sprite.texture = tex
+	_sprite.hframes = h
+	_sprite.vframes = v
+	_anim_frame = 0
+	_sprite.frame = 0
+
+
 func _animar(delta: float, direction: float) -> void:
 	if _sprite == null:
 		return
@@ -117,11 +152,34 @@ func _animar(delta: float, direction: float) -> void:
 	elif direction < 0.0:
 		_sprite.scale.x = -absf(_sprite.scale.x)
 
-	var passo := _FRAME_TIME_ANDANDO if absf(velocity.x) > 5.0 else _FRAME_TIME_PARADO
 	_anim_t += delta
+
+	# Tiro: roda a folha de tiro uma vez (sem loop), prioridade sobre idle/andar.
+	if _atirando:
+		_set_sheet(_TEX_TIRO, _TIRO_H, _TIRO_V)
+		if _anim_t >= _tiro_dt:
+			_anim_t -= _tiro_dt
+			if _anim_frame < _TIRO_N - 1:
+				_anim_frame += 1
+				_sprite.frame = _anim_frame
+		return
+
+	# Andar (se há velocidade horizontal) ou idle.
+	var passo: float
+	var total: int
+	if absf(velocity.x) > 5.0:
+		_set_sheet(_TEX_ANDAR, _ANDAR_H, _ANDAR_V)
+		passo = _ANDAR_DT
+		total = _ANDAR_N
+	else:
+		_set_sheet(_TEX_IDLE, _IDLE_H, _IDLE_V)
+		passo = _IDLE_DT
+		total = _IDLE_N
+
 	if _anim_t >= passo:
 		_anim_t -= passo
-		_sprite.frame = (_sprite.frame + 1) % _FRAMES_IDLE
+		_anim_frame = (_anim_frame + 1) % total
+		_sprite.frame = _anim_frame
 
 
 func morrer() -> void:
