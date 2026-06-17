@@ -14,6 +14,12 @@ extends Node2D
 @onready var fundo: Sprite2D = $Fundo
 @onready var camera: Camera2D = $CharacterBody2D/Camera2D
 
+const _HUD_OBJETIVO := preload("res://Scripts/UI/objective_hud.gd")
+const _TELA_CREDITOS := preload("res://Scripts/UI/credits_screen.gd")
+
+var _hud: CanvasLayer = null
+var _creditos_mostrados := false
+
 
 func _ready() -> void:
 	end_screen.visible = false
@@ -24,6 +30,8 @@ func _ready() -> void:
 	win_zone.body_entered.connect(_on_win_zone_body_entered)
 	restart_button.pressed.connect(_on_reiniciar)
 	_alinhar_fundo_aos_limites_da_camera()
+	_hud = _HUD_OBJETIVO.new()
+	add_child(_hud)
 	# Pula a intro se o jogador já a viu nesta sessão (ex.: após "Jogar de novo").
 	if GameState.get_flag("intro_vista"):
 		intro.queue_free()
@@ -79,11 +87,25 @@ func _on_player_morreu() -> void:
 
 func _on_win_zone_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
-		AudioManager.play_credits_music()
-		_mostrar_fim("FIM")
+		_mostrar_creditos()
+
+
+func _mostrar_creditos() -> void:
+	if _creditos_mostrados:
+		return
+	_creditos_mostrados = true
+	if _hud:
+		_hud.marcar_vitoria()
+		_hud.queue_free()
+	AudioManager.play_credits_music()
+	var creditos := _TELA_CREDITOS.new()
+	add_child(creditos)
+	get_tree().paused = true
 
 
 func _mostrar_fim(texto: String) -> void:
+	if _hud:
+		_hud.queue_free()
 	end_title.text = texto
 	end_screen.visible = true
 	get_tree().paused = true
