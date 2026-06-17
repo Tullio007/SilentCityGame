@@ -69,6 +69,7 @@ func _physics_process(delta: float) -> void:
 
 func _atirar() -> void:
 	_pode_atirar = false
+	AudioManager.play_lumi_attack()
 	var proj := PROJECTILE_SCENE.instantiate()
 	# Spawn ligeiramente à frente e na altura do tronco para evitar tocar o chão.
 	var origem := global_position + Vector2(_olhando * 24.0, -10.0)
@@ -83,6 +84,7 @@ func tomar_dano(valor: int) -> void:
 		return
 	vida = max(vida - valor, 0)
 	vida_alterada.emit(vida, VIDA_MAXIMA)
+	AudioManager.play_lumi_hurt()
 	_flash_dano()
 	if vida == 0:
 		morrer()

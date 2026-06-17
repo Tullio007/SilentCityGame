@@ -9,8 +9,17 @@ extends CharacterBody2D
 @export var duracao_ataque: float = 0.2
 @export var duracao_recuperacao: float = 0.9
 @export var alcance_ataque: float = 60.0
+## Caminho do SFX de ataque deste mob (ex: "res://Assets/Audio/SFX/enemies/mob1/attack.ogg").
+@export var sfx_attack_path: String = ""
+## Grupo da horda (ex: "horde_insetos"). Todos os inimigos da mesma horda
+## devem ter o mesmo valor. A memória dropa quando o último morrer.
+@export var horde_group: String = ""
+## Recurso de memória que esta horda solta. Coloque o mesmo .tres em todos
+## os inimigos da horda — apenas o último a morrer vai disparar o drop.
+@export var memory_data: MemoryItem = null
 
 const GRAVITY := 800.0
+const _MEMORY_SCENE := preload("res://Scenes/memory_pickup.tscn")
 
 enum Estado { PATRULHA, TELEGRAFANDO, ATACANDO, RECUPERANDO, MORTO }
 
@@ -30,6 +39,8 @@ var _flash_tween: Tween = null
 
 func _ready() -> void:
 	add_to_group("enemy")
+	if horde_group != "":
+		add_to_group(horde_group)
 	_origem_x = global_position.x
 	vida = vida_maxima
 
@@ -77,6 +88,8 @@ func _entrar_telegraph() -> void:
 	_estado = Estado.TELEGRAFANDO
 	_tempo_estado = 0.0
 	velocity.x = 0.0
+	if not sfx_attack_path.is_empty():
+		AudioManager.play_sfx_path(sfx_attack_path)
 	_aviso_telegraph()
 
 
@@ -161,6 +174,10 @@ func _morrer() -> void:
 	_estado = Estado.MORTO
 	velocity = Vector2.ZERO
 	morreu.emit()
+	# Sai do grupo da horda antes de checar — assim o count já reflete a morte.
+	if horde_group != "":
+		remove_from_group(horde_group)
+	_spawnar_memoria()
 	# Desliga colisões para o cadáver não bloquear o jogador enquanto faz o fade.
 	set_collision_layer(0)
 	set_collision_mask(0)
@@ -172,6 +189,20 @@ func _morrer() -> void:
 		t.tween_property(_sprite, "modulate:a", 0.0, 0.35)
 		await t.finished
 	queue_free()
+
+
+func _spawnar_memoria() -> void:
+	if memory_data == null:
+		return
+	if GameState.get_flag("mem_" + memory_data.id):
+		return
+	# Só dropa se for o último vivo da horda (grupo já vazio após remove_from_group).
+	if horde_group != "" and not get_tree().get_nodes_in_group(horde_group).is_empty():
+		return
+	var pickup := _MEMORY_SCENE.instantiate()
+	pickup.memory_data = memory_data
+	pickup.global_position = global_position
+	get_parent().add_child(pickup)
 
 
 func _achar_player() -> Node2D:

@@ -44,6 +44,7 @@ func _on_dialogue_node(speaker: String, text: String, options: Array) -> void:
 		for i in options.size():
 			var b := Button.new()
 			b.text = str(options[i].get("text", "..."))
+			b.pressed.connect(AudioManager.play_button_click)
 			b.pressed.connect(_manager.choose.bind(i))
 			options_box.add_child(b)
 
@@ -64,6 +65,18 @@ func _fechar() -> void:
 	get_tree().paused = false
 
 
+func show_memory(speaker: String, texto: String) -> void:
+	if _ativo:
+		return
+	speaker_label.text = speaker
+	text_label.text = texto
+	options_box.visible = false
+	continuar_hint.visible = true
+	panel.visible = true
+	_ativo = true
+	get_tree().paused = true
+
+
 func _input(event: InputEvent) -> void:
 	if not _ativo:
 		return
@@ -72,5 +85,8 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("ui_accept"):
 		get_viewport().set_input_as_handled()
+		AudioManager.play_dialogue_skip()
 		if _manager:
 			_manager.next()
+		else:
+			_fechar()

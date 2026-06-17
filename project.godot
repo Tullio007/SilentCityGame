@@ -18,11 +18,16 @@ config/name="SilentCityGame"
 run/main_scene="uid://bq1qhb13o0tqe"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout="res://default_bus_layout.tres"
+
 [autoload]
 
 Inventory="*res://Scripts/Inventory/inventory.gd"
 GameState="*res://Scripts/global/game_state.gd"
 DialogueUI="*res://Scenes/UI/dialogue_ui.tscn"
+AudioManager="*res://Scripts/Audio/AudioManager.gd"
 
 [input]
 
