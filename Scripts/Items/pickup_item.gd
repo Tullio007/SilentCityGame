@@ -5,15 +5,37 @@ extends Area2D
 
 var player_near := false
 var _coleta_tween: Tween = null
+var _hint: Label = null
 
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	_criar_hint()
+
+
+# Indicador "[E] coletar" acima do item (mesmo estilo ciano do Hint do NPC).
+func _criar_hint() -> void:
+	_hint = Label.new()
+	_hint.text = "[E] coletar"
+	_hint.add_theme_color_override("font_color", Color(0.0, 0.85, 1.0, 1.0))
+	_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_hint.position = Vector2(-50.0, -46.0)
+	_hint.size = Vector2(100.0, 20.0)
+	_hint.z_index = 50
+	_hint.visible = false
+	add_child(_hint)
+
+
+# Cartão (requer_tsp) só é coletável após o terminal TSP — não mostra o prompt antes.
+func _pode_coletar() -> bool:
+	return not requer_tsp or GameState.get_flag("tsp_resolvido") == true
 
 
 func _process(_delta: float) -> void:
-	if player_near and Input.is_action_just_pressed("interagir"):
+	if _hint:
+		_hint.visible = player_near and _pode_coletar()
+	if player_near and _pode_coletar() and Input.is_action_just_pressed("interagir"):
 		collect()
 
 
@@ -25,6 +47,8 @@ func _on_body_entered(body: Node) -> void:
 func _on_body_exited(body: Node) -> void:
 	if body.is_in_group("player"):
 		player_near = false
+		if _hint:
+			_hint.visible = false
 
 
 func collect() -> void:
@@ -46,6 +70,8 @@ func collect() -> void:
 
 
 func _animar_coleta() -> void:
+	if _hint:
+		_hint.visible = false
 	set_deferred("monitoring", false)
 	set_deferred("monitorable", false)
 	player_near = false

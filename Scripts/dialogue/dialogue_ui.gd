@@ -3,6 +3,11 @@ extends CanvasLayer
 var _manager: DialogueManager = null
 var _ativo := false
 
+# Memória mostrada por etapas (uma a cada Enter), como o diálogo do Marcos.
+var _modo_memoria := false
+var _memoria_etapas: PackedStringArray = PackedStringArray()
+var _memoria_idx := 0
+
 @onready var panel: Panel = $Panel
 @onready var speaker_label: Label = $Panel/Margin/VBox/Speaker
 @onready var text_label: Label = $Panel/Margin/VBox/Texto
@@ -61,6 +66,7 @@ func _fechar() -> void:
 			_manager.dialogue_finished.disconnect(_on_dialogue_finished)
 	_manager = null
 	_ativo = false
+	_modo_memoria = false
 	panel.visible = false
 	get_tree().paused = false
 
@@ -68,13 +74,31 @@ func _fechar() -> void:
 func show_memory(speaker: String, texto: String) -> void:
 	if _ativo:
 		return
+	# Mostra a memória POR ETAPAS (uma a cada Enter), como o diálogo do Marcos,
+	# em vez de despejar o texto inteiro. As etapas são os parágrafos do texto.
+	_memoria_etapas = _dividir_em_etapas(texto)
+	_memoria_idx = 0
+	_modo_memoria = true
 	speaker_label.text = speaker
-	text_label.text = texto
+	for child in options_box.get_children():
+		child.queue_free()
 	options_box.visible = false
 	continuar_hint.visible = true
+	text_label.text = _memoria_etapas[0]
 	panel.visible = true
 	_ativo = true
 	get_tree().paused = true
+
+
+func _dividir_em_etapas(texto: String) -> PackedStringArray:
+	var etapas: PackedStringArray = PackedStringArray()
+	for bruto in texto.split("\n\n", false):
+		var t := bruto.strip_edges()
+		if t != "":
+			etapas.append(t)
+	if etapas.is_empty():
+		etapas.append(texto.strip_edges())
+	return etapas
 
 
 func _input(event: InputEvent) -> void:
@@ -86,6 +110,13 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		get_viewport().set_input_as_handled()
 		AudioManager.play_dialogue_skip()
+		if _modo_memoria:
+			_memoria_idx += 1
+			if _memoria_idx < _memoria_etapas.size():
+				text_label.text = _memoria_etapas[_memoria_idx]
+			else:
+				_fechar()
+			return
 		if _manager:
 			_manager.next()
 		else:
