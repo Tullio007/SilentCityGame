@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var item_data: InventoryItem
+@export var requer_tsp: bool = false
 
 var player_near := false
 var _coleta_tween: Tween = null
@@ -29,6 +30,9 @@ func _on_body_exited(body: Node) -> void:
 func collect() -> void:
 	if item_data == null:
 		push_warning("Item sem dados!")
+		return
+
+	if requer_tsp and not GameState.get_flag("tsp_resolvido"):
 		return
 
 	if Inventory.add_item(item_data):
