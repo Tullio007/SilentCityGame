@@ -105,7 +105,7 @@ static func _held_karp(points: Array[Vector2]) -> Dictionary:
 
 		var parent_key = [mask, current]
 
-		var prev := parent.get(parent_key, -1)
+		var prev: int = parent.get(parent_key, -1)
 
 		mask &= ~(1 << current)
 
@@ -119,8 +119,8 @@ static func _held_karp(points: Array[Vector2]) -> Dictionary:
 	}
 
 
-static func _generate_subsets(n: int, size: int) -> Array:
-	var result: Array = []
+static func _generate_subsets(n: int, size: int) -> Array[int]:
+	var result: Array[int] = []
 
 	_generate_subsets_recursive(1, n, size, 0, 0, result)
 
@@ -133,7 +133,7 @@ static func _generate_subsets_recursive(
 	target_size: int,
 	current_size: int,
 	mask: int,
-	result: Array
+	result: Array[int]
 ) -> void:
 
 	if current_size == target_size:
