@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dhc6rtdhp4gcm"]
+
+[ext_resource type="Script" uid="uid://ba4lon7gispc7" path="res://pause_menu.gd" id="1_k0w1u"]
+[ext_resource type="Theme" uid="uid://bh2byfglkb0va" path="res://Scenes/UI/tema dos botões da tela.tres" id="2_k0w1u"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_k0w1u"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_1och7"]
+events = [SubResource("InputEventAction_k0w1u")]
+
+[node name="pause_menu" type="CanvasLayer" unique_id=106129337]
+process_mode = 3
+script = ExtResource("1_k0w1u")
+
+[node name="overlay" type="ColorRect" parent="." unique_id=1853605813]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.62352943)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1489977776]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -29.0
+offset_right = 55.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="resume" type="Button" parent="VBoxContainer" unique_id=1468821794]
+layout_mode = 2
+theme = ExtResource("2_k0w1u")
+shortcut = SubResource("Shortcut_1och7")
+text = "Resume"
+
+[node name="quit" type="Button" parent="VBoxContainer" unique_id=1248006719]
+layout_mode = 2
+theme = ExtResource("2_k0w1u")
+text = "Voltar ao menu"
+
+[connection signal="pressed" from="VBoxContainer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/quit" to="." method="_on_quit_pressed"]

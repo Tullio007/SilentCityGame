@@ -91,6 +91,102 @@ func get_all_items() -> Array[InventoryItem]:
 	return items_as_array
 
 
+# ──────────────────────────────────────────────
+# ORDENAÇÃO DO INVENTÁRIO — MERGE SORT (estável)
+# ──────────────────────────────────────────────
+# Algoritmo:    Merge Sort (ordenação por intercalação), implementado à mão.
+# Complexidade: O(n log n) tempo  /  O(n) espaço.
+# Estabilidade: ESTÁVEL — elementos com chave equivalente preservam a ordem
+#               relativa de entrada (a ordem de coleta). É exatamente essa
+#               propriedade que justifica escolher Merge Sort em vez de Quick
+#               Sort para a listagem do inventário.
+#
+# Critério de ordenação (composto):
+#   1º) Tipo — memórias (MEMORY) antes de itens comuns (COMMON)
+#   2º) Nome — ordem alfabética (case-insensitive)
+# Em empate nos dois critérios, a estabilidade preserva a ordem de coleta.
+
+# Retorna uma NOVA lista com os itens ordenados (não altera o inventário).
+func get_sorted_items() -> Array[InventoryItem]:
+	return _merge_sort(items_as_array)
+
+
+func _merge_sort(arr: Array[InventoryItem]) -> Array[InventoryItem]:
+	if arr.size() <= 1:
+		return arr
+
+	var mid: int = arr.size() / 2
+
+	var left: Array[InventoryItem] = _merge_sort(_sub_array(arr, 0, mid))
+	var right: Array[InventoryItem] = _merge_sort(_sub_array(arr, mid, arr.size()))
+
+	return _merge(left, right)
+
+
+func _merge(left: Array[InventoryItem], right: Array[InventoryItem]) -> Array[InventoryItem]:
+	var result: Array[InventoryItem] = []
+	var i: int = 0
+	var j: int = 0
+
+	while i < left.size() and j < right.size():
+		# "<= 0" garante a estabilidade: em empate, o elemento da metade
+		# ESQUERDA (que foi coletado antes) é inserido primeiro.
+		if _compare_items(left[i], right[j]) <= 0:
+			result.append(left[i])
+			i += 1
+		else:
+			result.append(right[j])
+			j += 1
+
+	while i < left.size():
+		result.append(left[i])
+		i += 1
+
+	while j < right.size():
+		result.append(right[j])
+		j += 1
+
+	return result
+
+
+# Comparador composto. Retorna <0 se "a" vem antes de "b", >0 se depois, 0 se equivalentes.
+func _compare_items(a: InventoryItem, b: InventoryItem) -> int:
+	var rank_a: int = _type_rank(a.type)
+	var rank_b: int = _type_rank(b.type)
+
+	if rank_a != rank_b:
+		return rank_a - rank_b
+
+	var name_a: String = a.display_name.to_lower()
+	var name_b: String = b.display_name.to_lower()
+
+	if name_a < name_b:
+		return -1
+	if name_a > name_b:
+		return 1
+
+	return 0
+
+
+# Menor rank → aparece primeiro na listagem.
+func _type_rank(item_type: int) -> int:
+	match item_type:
+		InventoryItem.ItemType.MEMORY:
+			return 0
+		InventoryItem.ItemType.COMMON:
+			return 1
+		_:
+			return 2
+
+
+# Cópia tipada do segmento [begin, end) — preserva Array[InventoryItem] na recursão.
+func _sub_array(arr: Array[InventoryItem], begin: int, end: int) -> Array[InventoryItem]:
+	var out: Array[InventoryItem] = []
+	for k in range(begin, end):
+		out.append(arr[k])
+	return out
+
+
 # Imprime o inventário no console (debug / linha de comando)
 func print_inventory() -> void:
 	if items.is_empty():
