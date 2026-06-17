@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bq1qhb13o0tqe"]
+[gd_scene load_steps=25 format=3 uid="uid://bq1qhb13o0tqe"]
 
 [ext_resource type="Script" path="res://node_2d.gd" id="1_j2wod"]
 [ext_resource type="Script" uid="uid://cevfrc0cqvlw4" path="res://Scripts/player/player.gd" id="2_v1qfn"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dhc6rtdhp4gcm" path="res://Scenes/pause_menu.tscn" id="11_pause"]
 [ext_resource type="Theme" uid="uid://bh2byfglkb0va" path="res://Scenes/UI/tema dos botões da tela.tres" id="12_botoes"]
 [ext_resource type="PackedScene" path="res://Scenes/UI/inventory_ui.tscn" id="13_inventory"]
+
+[ext_resource type="PackedScene" path="res://Scenes/terminal_tsp.tscn" id="14_terminal"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/tsp_puzzle.tscn" id="15_puzzle"]
 
 [sub_resource type="FontVariation" id="FontVar_oxanium_eb"]
 base_font = ExtResource("10_oxanium")
@@ -139,10 +142,17 @@ position = Vector2(1400, 402)
 [node name="Mob3" parent="." instance=ExtResource("3_enemy")]
 position = Vector2(2050, 402)
 
+; ── Terminal TSP ──
+; Fecha o loop: mobs → puzzle TSP → cartão (gateado) → porta
+[node name="TerminalTSP" parent="." instance=ExtResource("14_terminal")]
+position = Vector2(1750, 392)
+puzzle_scene = ExtResource("15_puzzle")
+
 [node name="ChavePickup" type="Area2D" parent="."]
 position = Vector2(2400, 388)
 script = ExtResource("5_pickup")
 item_data = ExtResource("6_chave")
+requer_tsp = true
 
 [node name="Sprite" type="Sprite2D" parent="ChavePickup"]
 scale = Vector2(0.25, 0.25)

@@ -1,0 +1,170 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Puzzle/tsp_puzzle.gd" id="1_tsp"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Oxanium/Oxanium-VariableFont_wght.ttf" id="2_oxanium"]
+
+[sub_resource type="FontVariation" id="FontVar_title"]
+base_font = ExtResource("2_oxanium")
+variation_opentype = { "wght": 700 }
+
+[sub_resource type="FontVariation" id="FontVar_body"]
+base_font = ExtResource("2_oxanium")
+variation_opentype = { "wght": 500 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_painel"]
+bg_color = Color(0.04, 0.06, 0.10, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.85, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.04, 0.10, 0.18, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.85, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+
+[node name="TSPPuzzle" type="CanvasLayer"]
+layer = 5
+process_mode = 3
+script = ExtResource("1_tsp")
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+mouse_filter = 0
+
+[node name="Painel" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -240.0
+offset_right = 250.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_painel")
+theme_override_constants/separation = 12
+
+[node name="Titulo" type="Label" parent="Painel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85, 1, 1)
+theme_override_fonts/font = SubResource("FontVar_title")
+theme_override_font_sizes/font_size = 18
+text = "REDE NEURAL — RECONECTAR NÓDULOS"
+horizontal_alignment = 1
+
+[node name="HSep" type="HSeparator" parent="Painel"]
+layout_mode = 2
+
+[node name="Instrucao" type="Label" parent="Painel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.97, 1, 0.8)
+theme_override_fonts/font = SubResource("FontVar_body")
+theme_override_font_sizes/font_size = 12
+text = "Clique nos nós em sequência. Comece pelo nó verde (S). Conecte todos pelo menor caminho possível."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DrawArea" type="Control" parent="Painel"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(460, 300)
+mouse_filter = 0
+
+[node name="Linha" type="Line2D" parent="Painel/DrawArea"]
+default_color = Color(0, 0.75, 1, 0.9)
+width = 3.0
+joint_mode = 1
+begin_cap_mode = 1
+end_cap_mode = 1
+antialiased = true
+
+[node name="LinhaDica" type="Line2D" parent="Painel/DrawArea"]
+visible = false
+default_color = Color(1, 0.85, 0, 0.7)
+width = 2.0
+joint_mode = 1
+begin_cap_mode = 1
+end_cap_mode = 1
+antialiased = true
+
+[node name="Rodape" type="HBoxContainer" parent="Painel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Custo" type="Label" parent="Painel/Rodape"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.97, 1, 1)
+theme_override_fonts/font = SubResource("FontVar_body")
+theme_override_font_sizes/font_size = 13
+text = "Seu custo: —"
+
+[node name="Otimo" type="Label" parent="Painel/Rodape"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0.85, 1, 0.7)
+theme_override_fonts/font = SubResource("FontVar_body")
+theme_override_font_sizes/font_size = 13
+text = "Ótimo: —"
+
+[node name="Status" type="Label" parent="Painel/Rodape"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.97, 1, 1)
+theme_override_fonts/font = SubResource("FontVar_body")
+theme_override_font_sizes/font_size = 13
+text = "Conecte todos os nós"
+horizontal_alignment = 1
+
+[node name="BtnDica" type="Button" parent="Painel/Rodape"]
+layout_mode = 2
+disabled = true
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_fonts/font = SubResource("FontVar_body")
+theme_override_font_sizes/font_size = 12
+text = "Ver dica"
+
+[node name="BtnLimpar" type="Button" parent="Painel/Rodape"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_colors/font_color = Color(0, 0.85, 1, 1)
+theme_override_fonts/font = SubResource("FontVar_body")
+theme_override_font_sizes/font_size = 12
+text = "Limpar"
+
+[node name="BtnFechar" type="Button" parent="Painel/Rodape"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_colors/font_color = Color(1, 0.27, 0.27, 1)
+theme_override_fonts/font = SubResource("FontVar_body")
+theme_override_font_sizes/font_size = 12
+text = "Fechar"
